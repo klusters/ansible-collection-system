@@ -1,0 +1,16 @@
+---
+
+- name: Force Gather Info from other hosts
+  when: hostvars[item].ansible_default_ipv4 is not defined
+  setup:
+    gather_subset: '!all,!min,default_ipv4'
+  delegate_to: "{{ item }}"
+  delegate_facts: yes
+  loop: "{{ groups['all'] }}"
+
+- name: Add mappings to /etc/hosts
+  become: yes
+  blockinfile:
+    path: /etc/hosts
+    content: "{{ lookup('template', 'templates/etc_hosts.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
