@@ -14,7 +14,7 @@ jobs:
     - name: Play Ansible Playbook
       uses: arillso/action.playbook@master
       with:
-        playbook: roles/etc_hosts/tests/playbook.yml
+        playbook: roles/etc_hosts/tests/test.yml
         inventory: roles/etc_hosts/tests/inventory
         galaxy_file: ''
       env:
