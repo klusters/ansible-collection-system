@@ -1,4 +1,4 @@
-name: Run ansible playbook
+name: Run ansible playbooks
 
 on: [push, pull_request]
 
@@ -8,11 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v2
+
     - name: configure ansible
       run: |
         printf '[defaults]\nroles_path=roles/' >ansible.cfg
+
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
