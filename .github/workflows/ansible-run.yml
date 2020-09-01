@@ -19,6 +19,7 @@ jobs:
         playbook: roles/etc_hosts/tests/test.yml
         inventory: roles/etc_hosts/tests/inventory
         galaxy_file: ''
+        connection: local
       env:
         ANSIBLE_HOST_KEY_CHECKING: 'false'
         ANSIBLE_DEPRECATION_WARNINGS: 'false'
