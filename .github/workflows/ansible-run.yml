@@ -10,7 +10,9 @@ jobs:
     steps:
     # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v2
-
+    - name: configure ansible
+      run: |
+        printf '[defaults]\nroles_path=roles/' >ansible.cfg
     - name: Play Ansible Playbook
       uses: saubermacherag/ansible-playbook-docker-action@v1.4
       with:
