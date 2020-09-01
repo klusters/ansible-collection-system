@@ -13,13 +13,9 @@ jobs:
     - name: configure ansible
       run: |
         printf '[defaults]\nroles_path=roles/' >ansible.cfg
-    - name: Play Ansible Playbook
-      uses: saubermacherag/ansible-playbook-docker-action@v1.4
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbookName: 'roles/etc_hosts/tests/test.yml'
-        inventoryFile: 'roles/etc_hosts/tests/inventory'
-        requirementsFile: ''
-        rolesPath: 'roles'
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: 'false'
-        ANSIBLE_DEPRECATION_WARNINGS: 'false'
+        playbook: 'roles/etc_hosts/tests/test.yml'
+        options: |
+          -i roles/etc_hosts/tests/inventory
