@@ -10,16 +10,14 @@ jobs:
     steps:
     # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v2
-    - name: configure ansible
-      run: |
-        printf '[defaults]\nroles_path=roles/' >ansible.cfg
+
     - name: Play Ansible Playbook
-      uses: arillso/action.playbook@master
+      uses: saubermacherag/ansible-playbook-docker-action@v1.4
       with:
-        playbook: roles/etc_hosts/tests/test.yml
-        inventory: roles/etc_hosts/tests/inventory
-        galaxy_file: ''
-        connection: local
+        playbookName: 'roles/etc_hosts/tests/test.yml'
+        inventoryFile: 'roles/etc_hosts/tests/inventory'
+        requirementsFile: ''
+        rolesPath: 'roles'
       env:
         ANSIBLE_HOST_KEY_CHECKING: 'false'
         ANSIBLE_DEPRECATION_WARNINGS: 'false'
