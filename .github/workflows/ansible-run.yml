@@ -5,43 +5,29 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PY_COLORS: 1
-      ANSIBLE_FORCE_COLOR: 1
-
     strategy:
       fail-fast: true
       matrix:
+        collection_role:
+          - etc_hosts
         molecule_distro:
           # Bug: Ansible cannot gather network facts on CentOS in Docker
           # - { "distro":"centos-7", "command":"/usr/sbin/init" }
           - { "distro":"centos-8", "command":"/usr/sbin/init" }
           - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
           - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
-        collection_role:
-          - etc_hosts
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
+      MOLECULE_COMMAND: ${{ matrix.molecule_distro.command }}
+      MOLECULE_DISTRO: ${{ matrix.molecule_distro.distro }}
 
     steps:
       - uses: actions/checkout@v2
         with:
           path: ansible_collections/klusters/system
 
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
+      - uses: gofrolist/molecule-action@v2
         with:
-          python-version: 3.8
-
-      - name: Install dependencies
-        run: |
-          sudo apt install docker
-          pip install --upgrade pip
-          pip install molecule yamllint ansible-lint docker
-      
-      - name: Run role tests
-        run: >-
-          cd ansible_collections/klusters/system &&
-          molecule --version &&
-          ansible --version &&
-          MOLECULE_COMMAND=${{ matrix.molecule_distro.command }}
-          MOLECULE_DISTRO=${{ matrix.molecule_distro.distro }}
-          molecule test -s ${{ matrix.collection_role }}
+          molecule_working_dir: ansible_collections/klusters/system
+          molecule_args: -s ${{ matrix.collection_role }}
