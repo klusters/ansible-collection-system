@@ -1,0 +1,53 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  yamllint .
+  ansible-lint
+platforms:
+  - name: ubuntu-xenial
+    image: ${MOLECULE_DISTRO:-ubuntu:xenial}
+    privileged: true
+    command: ${MOLECULE_COMMAND:-"sleep infinity"}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  - name: ubuntu-bionic
+    image: ${MOLECULE_DISTRO:-ubuntu:bionic}
+    privileged: true
+    command: ${MOLECULE_COMMAND:-"sleep infinity"}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  # - name: centos-7
+  #   image: ${MOLECULE_DISTRO:-centos:7}
+  #   privileged: true
+  #   command: ${MOLECULE_COMMAND:-"sleep infinity"}
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: centos-8
+    image: ${MOLECULE_DISTRO:-centos:8}
+    privileged: true
+    command: ${MOLECULE_COMMAND:-"sleep infinity"}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    # - idempotence
+    - verify
