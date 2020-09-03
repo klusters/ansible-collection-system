@@ -1,9 +1,0 @@
----
-- name: Converge
-  hosts: all
-  gather_facts: false
-
-  roles:
-    - role: klusters.system.etc_hosts
-      # Dry run : As in docker, we cannot edit /etc/hosts file
-      check_mode: yes
