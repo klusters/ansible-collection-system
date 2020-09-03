@@ -22,6 +22,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install molecule yamllint ansible-lint docker
 
-      - name: Run role test
+      - name: Run role galaxy publish
         run: >-
           ansible-playbook -i 'localhost,' build/galaxy_deploy.yml -e "github_tag=${{ github.ref }}"
