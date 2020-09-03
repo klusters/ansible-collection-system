@@ -1,6 +1,7 @@
 # Ansible Collection - klusters.system
+[Inspired by ericsysmin.system](https://galaxy.ansible.com/ericsysmin/system)
 
-Ansible collection that holds roles, that can be used to configure common system services. ![Inspired by ericsysmin.system](https://galaxy.ansible.com/ericsysmin/system)
+Ansible collection that holds roles, that can be used to configure common system services. 
 
 ## Roles
 
