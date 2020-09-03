@@ -23,6 +23,7 @@ This role is tested against :
 
 ## ToDo
 
-  - [] Fix : CentOS 7 tests (Ansible cannot gather network facts from CentOS 7 in Docker container)
-  - [] Feat. : Add the posibility to choose the ip address & fqdn hostvars used by role's template
-  - [] Tests : Add assertions
+  - [ ] Fix : CentOS 7 tests (Ansible cannot gather network facts from CentOS 7 in Docker container)
+  - [ ] Feat. : Add the posibility to choose the ip address & fqdn hostvars used by role's template
+  - [x] Feat. : Add documentation
+  - [ ] Tests : Add assertions
