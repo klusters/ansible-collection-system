@@ -22,20 +22,4 @@ jobs:
         with:
           path: ansible_collections/klusters/system
 
-      - name: Setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-          architecture: x64
-
-      - name: Install dependencies
-        run: |
-          sudo apt install docker
-          python -m pip install --upgrade pip
-          pip install molecule yamllint ansible-lint docker
-
-      - name: Run role tests
-        run: >-
-          molecule --version &&
-          ansible --version &&
-          molecule test
+      - uses: gofrolist/molecule-action@v2
