@@ -23,4 +23,5 @@ jobs:
           path: ansible_collections/klusters/system
 
       - uses: gofrolist/molecule-action@v2
-        molecule_working_dir: ansible_collections/klusters/system
+        with:
+          molecule_working_dir: ansible_collections/klusters/system
