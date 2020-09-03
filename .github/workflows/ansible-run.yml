@@ -12,7 +12,6 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python-version: ['2.x']
         molecule_distro:
           - {"distro":"centos-8", "command":"/usr/sbin/init"}
         collection_role:
@@ -26,7 +25,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.8'
           architecture: x64
 
       - name: Install dependencies
@@ -39,6 +38,4 @@ jobs:
         run: >-
           molecule --version &&
           ansible --version &&
-          MOLECULE_COMMAND=${{ matrix.molecule_distro.command }}
-          MOLECULE_DISTRO=${{ matrix.molecule_distro.distro }}
           molecule test
