@@ -1,6 +1,18 @@
-name: Ansible Tests
+name: "klusters.system.etc_hosts"
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'roles/etc_hosts/**'
+      - 'molecule/etc_hosts/**'
+      - '.github/workflows/etc_hosts.yml'
+      - 'molecule/common/**'
+  pull_request:
+    paths:
+      - 'roles/etc_hosts/**'
+      - 'molecule/etc_hosts/**'
+      - '.github/workflows/etc_hosts.yml'
+      - 'molecule/common/**'
 
 jobs:
   build:

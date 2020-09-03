@@ -1,38 +1,29 @@
-Role Name
-=========
+# klusters.system.etc_hosts
 
-A brief description of the role goes here.
+This role writes ip address (*ansible_default_ipv4.address*) and fqdn (*ansible_fqdn*) from every host in the inventory to /etc/hosts file.
 
-Requirements
-------------
+This role has been created because we didn't find any scalable role. Each host will gather network facts from all other hosts. That's how, we ensure that every host will be written in every hosts' /etc/hosts file, even when using '*strategy: free*' and '*gather_facts: false*'
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+This role is tested against :
+  - CentOS 8
+  - Ubuntu 18.04 & 20.04
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Examples
 
-Dependencies
-------------
+```yaml
+- hosts: all
+  gather_facts: false
+  strategy: free
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+  roles:
+    - role: klusters.system.etc_hosts
+```
 
-Example Playbook
-----------------
+## ToDo
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+  - [ ] Fix : CentOS 7 tests (Ansible cannot gather network facts from CentOS 7 in Docker container)
+  - [ ] Feat. : Add the posibility to choose the ip address & fqdn hostvars used by role's template
+  - [x] Feat. : Add documentation
+  - [ ] Tests : Add assertions
