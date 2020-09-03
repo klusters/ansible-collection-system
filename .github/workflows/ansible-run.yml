@@ -12,10 +12,10 @@ jobs:
           - etc_hosts
         molecule_distro:
           # Bug: Ansible cannot gather network facts on CentOS in Docker
-          # - { "distro":"centos-7", "command":"/usr/sbin/init" }
-          - { "distro":"centos-8", "command":"/usr/sbin/init" }
-          - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
+          # - { "distro":"centos:7", "command":"/usr/sbin/init" }
+          - { "distro":"centos:8", "command":"/usr/sbin/init" }
+          - { "distro":"ubuntu:18.04", "command":"/lib/systemd/systemd" }
+          - { "distro":"ubuntu:20.04", "command":"/lib/systemd/systemd" }
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
