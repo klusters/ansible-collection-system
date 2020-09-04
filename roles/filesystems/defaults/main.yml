@@ -1,0 +1,85 @@
+---
+
+default_fs_type: xfs
+
+dev_mapping:
+    # /dev/xvda:
+    # mount_path: /
+    # fs_type: ext4
+
+    - dev_name: /dev/xvdb
+      mount_path: /var/log
+
+    # - dev_name: /dev/xvdc
+    #   mount_path: /home
+    #   fs_type: ext4
+
+    - dev_name: /dev/xvdd
+      mount_path: /opt
+
+    - dev_name: /dev/xvde
+      mount_path: /tmp
+
+    # - dev_name: /dev/xvdf
+    #   mount_path: 
+    #   fs_type: xfs
+
+    - dev_name: /dev/xvdg
+      mount_path: /data/01
+
+    - dev_name: /dev/xvdh
+      mount_path: /data/02
+
+    - dev_name: /dev/xvdi
+      mount_path: /data/03
+
+    - dev_name: /dev/xvdj
+      mount_path: /data/04
+
+    - dev_name: /dev/xvdk
+      mount_path: /data/05
+
+    - dev_name: /dev/xvdl
+      mount_path: /data/06
+
+    - dev_name: /dev/xvdm
+      mount_path: /data/07
+
+    - dev_name: /dev/xvdn
+      mount_path: /data/08
+
+    - dev_name: /dev/xvdo
+      mount_path: /data/09
+
+    - dev_name: /dev/xvdp
+      mount_path: /data/10
+
+    - dev_name: /dev/xvdq
+      mount_path: /data/11
+
+    - dev_name: /dev/xvdr
+      mount_path: /data/12
+
+    - dev_name: /dev/xvds
+      mount_path: /data/13
+
+    - dev_name: /dev/xvdt
+      mount_path: /data/14
+
+    - dev_name: /dev/xvdu
+      mount_path: /data/15
+
+    - dev_name: /dev/xvdv
+      mount_path: /data/16
+
+    - dev_name: /dev/xvdw
+      mount_path: /data/17
+
+    - dev_name: /dev/xvdx
+      mount_path: /data/18
+
+    - dev_name: /dev/xvdy
+      mount_path: /data/19
+
+    - dev_name: /dev/xvdz
+      mount_path: /data/20
