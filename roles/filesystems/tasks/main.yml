@@ -1,17 +1,19 @@
 ---
 
 - name: Format existing block devices
+  become: true
   filesystem:
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     dev: "{{ item.dev_name }}"
-  when: item.dev_name | basename in hostvars[inventory_hostname].ansible_devices
+  when: item.dev_name | basename in ansible_devices
   loop: "{{ dev_mapping }}"
 
 - name: Mount formated block devices
+  become: true
   mount:
     name: "{{ item.mount_path }}"
     src: "{{ item.dev_name }}"
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     state: mounted
-  when: item.dev_name | basename in hostvars[inventory_hostname].ansible_devices
+  when: item.dev_name | basename in ansible_devices
   loop: "{{ dev_mapping }}"

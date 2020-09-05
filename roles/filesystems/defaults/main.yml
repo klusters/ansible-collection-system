@@ -3,83 +3,83 @@
 default_fs_type: xfs
 
 dev_mapping:
-    # /dev/xvda:
+    # /dev/sda:
     # mount_path: /
     # fs_type: ext4
 
-    - dev_name: /dev/xvdb
+    - dev_name: /dev/sdb
       mount_path: /var/log
 
-    # - dev_name: /dev/xvdc
+    # - dev_name: /dev/sdc
     #   mount_path: /home
     #   fs_type: ext4
 
-    - dev_name: /dev/xvdd
+    - dev_name: /dev/sdd
       mount_path: /opt
 
-    - dev_name: /dev/xvde
+    - dev_name: /dev/sde
       mount_path: /tmp
 
-    # - dev_name: /dev/xvdf
+    # - dev_name: /dev/sdf
     #   mount_path: 
     #   fs_type: xfs
 
-    - dev_name: /dev/xvdg
+    - dev_name: /dev/sdg
       mount_path: /data/01
 
-    - dev_name: /dev/xvdh
+    - dev_name: /dev/sdh
       mount_path: /data/02
 
-    - dev_name: /dev/xvdi
+    - dev_name: /dev/sdi
       mount_path: /data/03
 
-    - dev_name: /dev/xvdj
+    - dev_name: /dev/sdj
       mount_path: /data/04
 
-    - dev_name: /dev/xvdk
+    - dev_name: /dev/sdk
       mount_path: /data/05
 
-    - dev_name: /dev/xvdl
+    - dev_name: /dev/sdl
       mount_path: /data/06
 
-    - dev_name: /dev/xvdm
+    - dev_name: /dev/sdm
       mount_path: /data/07
 
-    - dev_name: /dev/xvdn
+    - dev_name: /dev/sdn
       mount_path: /data/08
 
-    - dev_name: /dev/xvdo
+    - dev_name: /dev/sdo
       mount_path: /data/09
 
-    - dev_name: /dev/xvdp
+    - dev_name: /dev/sdp
       mount_path: /data/10
 
-    - dev_name: /dev/xvdq
+    - dev_name: /dev/sdq
       mount_path: /data/11
 
-    - dev_name: /dev/xvdr
+    - dev_name: /dev/sdr
       mount_path: /data/12
 
-    - dev_name: /dev/xvds
+    - dev_name: /dev/sds
       mount_path: /data/13
 
-    - dev_name: /dev/xvdt
+    - dev_name: /dev/sdt
       mount_path: /data/14
 
-    - dev_name: /dev/xvdu
+    - dev_name: /dev/sdu
       mount_path: /data/15
 
-    - dev_name: /dev/xvdv
+    - dev_name: /dev/sdv
       mount_path: /data/16
 
-    - dev_name: /dev/xvdw
+    - dev_name: /dev/sdw
       mount_path: /data/17
 
-    - dev_name: /dev/xvdx
+    - dev_name: /dev/sdx
       mount_path: /data/18
 
-    - dev_name: /dev/xvdy
+    - dev_name: /dev/sdy
       mount_path: /data/19
 
-    - dev_name: /dev/xvdz
+    - dev_name: /dev/sdz
       mount_path: /data/20
