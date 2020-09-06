@@ -1,0 +1,12 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  vars_files: ['../../roles/filesystems/defaults/main.yml']
+  tasks:
+  - name: Assert device is mounted
+    assert:
+      that: item.dev_name in ansible_mounts | json_query('[*].device')
+    loop: "{{ dev_mapping }}"
+    when: item.dev_name | basename in ansible_devices
