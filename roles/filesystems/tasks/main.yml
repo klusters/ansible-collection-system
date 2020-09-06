@@ -5,6 +5,7 @@
   filesystem:
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     dev: "{{ item.dev_name }}"
+    opts: "{{ item.options | default(omit) }}"
   when: item.dev_name | basename in ansible_devices
   loop: "{{ dev_mapping }}"
 
@@ -14,6 +15,7 @@
     name: "{{ item.mount_path }}"
     src: "{{ item.dev_name }}"
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
+    opts: "{{ item.mnt_opts | default(omit) }}"
     state: mounted
   when: item.dev_name | basename in ansible_devices
   loop: "{{ dev_mapping }}"

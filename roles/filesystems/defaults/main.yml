@@ -9,6 +9,7 @@ dev_mapping:
 
     - dev_name: /dev/sdb
       mount_path: /var/log
+      options: '-L test_label'
 
     # - dev_name: /dev/sdc
     #   mount_path: /home
@@ -26,60 +27,80 @@ dev_mapping:
 
     - dev_name: /dev/sdg
       mount_path: /data/01
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdh
       mount_path: /data/02
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdi
       mount_path: /data/03
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdj
       mount_path: /data/04
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdk
       mount_path: /data/05
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdl
       mount_path: /data/06
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdm
       mount_path: /data/07
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdn
       mount_path: /data/08
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdo
       mount_path: /data/09
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdp
       mount_path: /data/10
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdq
       mount_path: /data/11
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdr
       mount_path: /data/12
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sds
       mount_path: /data/13
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdt
       mount_path: /data/14
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdu
       mount_path: /data/15
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdv
       mount_path: /data/16
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdw
       mount_path: /data/17
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdx
       mount_path: /data/18
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdy
       mount_path: /data/19
+      mnt_opts: 'defaults,noatime,nofail'
 
     - dev_name: /dev/sdz
       mount_path: /data/20
+      mnt_opts: 'defaults,noatime,nofail'
