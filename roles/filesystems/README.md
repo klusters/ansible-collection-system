@@ -6,7 +6,8 @@ This role has been created to prepare storage on freshly installed machines. We 
 
 ## Requirements
 
-# This role is not tested yet !
+This role is tested against :
+  - CentOS 7 & 8
 
 ## Examples
 
@@ -36,5 +37,6 @@ This role has been created to prepare storage on freshly installed machines. We 
   - [ ] Feat. : Write fs' UUID to /etc/fstab to handle disordered block devices connection
   - [ ] Feat. : Use var to handle block device naming rules (xvd/sd/vd)
   - [x] Feat. : Add documentation
+  - [ ] Feat. : Add vars to documentation
   - [ ] Tests : Add GCP tests (via Molecule + Vagrant ?)
   - [ ] Tests : Add AWS tests (via Molecule + Vagrant ?)
