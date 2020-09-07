@@ -8,12 +8,10 @@ dev_mapping:
     # fs_type: ext4
 
     - dev_name: /dev/sdb
-      mount_path: /var/log
-      options: '-L test_label'
+      fs_type: lvm
 
-    # - dev_name: /dev/sdc
-    #   mount_path: /home
-    #   fs_type: ext4
+    - dev_name: /dev/sdc
+      fs_type: lvm
 
     - dev_name: /dev/sdd
       mount_path: /opt
@@ -104,3 +102,18 @@ dev_mapping:
     - dev_name: /dev/sdz
       mount_path: /data/20
       mnt_opts: 'defaults,noatime,nofail'
+
+volume_groups:
+  - name: vg.data
+    pvs: /dev/sdb,/dev/sdc
+
+logical_volumes:
+  - name: lv.home.user1
+    vg: vg.data
+    size: 500M
+    mount_path: /home/user1
+
+  - name: lv.home.user2
+    vg: vg.data
+    size: 400M
+    mount_path: /home/user2

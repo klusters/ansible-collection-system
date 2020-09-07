@@ -32,8 +32,8 @@ This role is tested against :
 
 ## ToDo
 
-  - [ ] Feat. : Add mkfs options
-  - [ ] Feat. : Add LVM support (PV/VG/LV)
+  - [x] Feat. : Add mkfs & mount options
+  - [x] Feat. : Add LVM support (PV/VG/LV)
   - [ ] Feat. : Write fs' UUID to /etc/fstab to handle disordered block devices connection
   - [ ] Feat. : Use var to handle block device naming rules (xvd/sd/vd)
   - [x] Feat. : Add documentation
