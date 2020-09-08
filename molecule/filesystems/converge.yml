@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  pre_tasks:
+    - debug:
+        msg: "{{ ansible_devices.keys() }}"
+  roles:
+    - role: klusters.system.filesystems

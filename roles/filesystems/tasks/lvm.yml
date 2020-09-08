@@ -1,0 +1,34 @@
+---
+
+- name: Create volume groups
+  become: true
+  lvg:
+    vg: "{{ item.name }}"
+    pvs: "{{ item.pvs }}"
+  loop: "{{ volume_groups }}"
+
+- name: Create logical volumes
+  become: true
+  lvol:
+    vg: "{{ item.vg }}"
+    lv: "{{ item.name }}"
+    size: "{{ item.size }}"
+  loop: "{{ logical_volumes }}"
+
+- name: Format created logical volumes
+  become: true
+  filesystem:
+    fstype: "{{ item.fs_type | default(default_fs_type) }}"
+    dev: "/dev/mapper/{{ item.vg }}-{{ item.name }}"
+    opts: "{{ item.options | default(omit) }}"
+  loop: "{{ logical_volumes }}"
+
+- name: Mount formated logical volumes
+  become: true
+  mount:
+    name: "{{ item.mount_path }}"
+    src: "/dev/mapper/{{ item.vg }}-{{ item.name }}"
+    fstype: "{{ item.fs_type | default(default_fs_type) }}"
+    opts: "{{ item.mnt_opts | default(omit) }}"
+    state: mounted
+  loop: "{{ logical_volumes }}"

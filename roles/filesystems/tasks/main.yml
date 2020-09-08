@@ -1,0 +1,33 @@
+---
+
+- name: Install LVM2 packages
+  become: true
+  package:
+    name: lvm2
+    state: present
+  when: "'lvm' in dev_mapping | json_query('[*].fs_type')"
+
+- name: Format existing block devices
+  become: true
+  filesystem:
+    fstype: "{{ item.fs_type | default(default_fs_type) }}"
+    dev: "{{ item.dev_name }}"
+    opts: "{{ item.options | default(omit) }}"
+  when: item.dev_name | basename in ansible_devices
+  loop: "{{ dev_mapping }}"
+
+- name: Mount formated block devices
+  become: true
+  mount:
+    name: "{{ item.mount_path }}"
+    src: "{{ item.dev_name }}"
+    fstype: "{{ item.fs_type | default(default_fs_type) }}"
+    opts: "{{ item.mnt_opts | default(omit) }}"
+    state: mounted
+  when:
+    - item.fs_type | default(default_fs_type) != 'lvm'
+    - item.dev_name | basename in ansible_devices
+  loop: "{{ dev_mapping }}"
+
+- include: lvm.yml
+  when: "'lvm' in dev_mapping | json_query('[*].fs_type')"

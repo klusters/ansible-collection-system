@@ -1,0 +1,91 @@
+---
+
+default_fs_type: xfs
+
+dev_mapping:
+    # /dev/sda:
+    # mount_path: /
+    # fs_type: ext4
+
+    # - dev_name: /dev/sdb
+    #   fs_type: lvm
+
+    - dev_name: /dev/sdc
+      fs_type: lvm
+
+    - dev_name: /dev/sdd
+      fs_type: lvm
+
+    - dev_name: /dev/sde
+      mount_path: /var/log
+
+    - dev_name: /dev/sdf
+      mount_path: /tmp
+
+    - dev_name: /dev/sdg
+      mount_path: /data/01
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdh
+      mount_path: /data/02
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdi
+      mount_path: /data/03
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdj
+      mount_path: /data/04
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdk
+      mount_path: /data/05
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdl
+      mount_path: /data/06
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdm
+      mount_path: /data/07
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdn
+      mount_path: /data/08
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdo
+      mount_path: /data/09
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdp
+      mount_path: /data/10
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdq
+      mount_path: /data/11
+      mnt_opts: 'defaults,noatime,nofail'
+
+    - dev_name: /dev/sdr
+      mount_path: /data/12
+      mnt_opts: 'defaults,noatime,nofail'
+
+volume_groups:
+  - name: vg.data
+    pvs: /dev/sdb,/dev/sdc,/dev/sdd
+
+logical_volumes:
+  - name: lv.home.user1
+    vg: vg.data
+    size: 500M
+    mount_path: /home/user1
+
+  - name: lv.home.user2
+    vg: vg.data
+    size: 400M
+    mount_path: /home/user2
+
+  - name: lv.opt
+    vg: vg.data
+    size: 500M
+    mount_path: /opt
