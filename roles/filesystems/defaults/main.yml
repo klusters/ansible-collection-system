@@ -14,14 +14,13 @@ dev_mapping:
       fs_type: lvm
 
     - dev_name: /dev/sdd
-      mount_path: /opt
+      fs_type: lvm
 
     - dev_name: /dev/sde
-      mount_path: /tmp
+      mount_path: /var/log
 
-    # - dev_name: /dev/sdf
-    #   mount_path: 
-    #   fs_type: xfs
+    - dev_name: /dev/sdf
+      mount_path: /tmp
 
     - dev_name: /dev/sdg
       mount_path: /data/01
@@ -71,41 +70,9 @@ dev_mapping:
       mount_path: /data/12
       mnt_opts: 'defaults,noatime,nofail'
 
-    - dev_name: /dev/sds
-      mount_path: /data/13
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdt
-      mount_path: /data/14
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdu
-      mount_path: /data/15
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdv
-      mount_path: /data/16
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdw
-      mount_path: /data/17
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdx
-      mount_path: /data/18
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdy
-      mount_path: /data/19
-      mnt_opts: 'defaults,noatime,nofail'
-
-    - dev_name: /dev/sdz
-      mount_path: /data/20
-      mnt_opts: 'defaults,noatime,nofail'
-
 volume_groups:
   - name: vg.data
-    pvs: /dev/sdb,/dev/sdc
+    pvs: /dev/sdb,/dev/sdc,/dev/sdd
 
 logical_volumes:
   - name: lv.home.user1
@@ -117,3 +84,8 @@ logical_volumes:
     vg: vg.data
     size: 400M
     mount_path: /home/user2
+
+  - name: lv.opt
+    vg: vg.data
+    size: 500M
+    mount_path: /opt
