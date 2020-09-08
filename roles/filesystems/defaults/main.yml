@@ -7,8 +7,8 @@ dev_mapping:
     # mount_path: /
     # fs_type: ext4
 
-    - dev_name: /dev/sdb
-      fs_type: lvm
+    # - dev_name: /dev/sdb
+    #   fs_type: lvm
 
     - dev_name: /dev/sdc
       fs_type: lvm

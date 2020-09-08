@@ -8,10 +8,9 @@ This role has been created to prepare storage on freshly installed machines. We 
 
 This role is tested against :
   - CentOS 7 & 8
+  - Ubuntu 18.04 & 20.04
 
 This role will only configure block devices existing on the remote host, i.e. it will not fail if a block device in `dev_mapping` is not found on the host, it will just skip it. This helps to configure an entire cluster with different disks configuration (e.g. Elasticsearch Cluster with 2 Masters, 2 Coordinators, and 6 Datanodes : Masters & Coordinators will have /data/01 only and Datanodes will have /data/01..12 but both will have system FS : /var/log, etc...)
-
-This said, this role will fail if you provide a block device in `pvs` that does not exist on the remote host, or the device is not a lvm partition. Use dev_mapping with `fs_type: lvm` to format the device in lvm format
 
 ## Role Variables
 

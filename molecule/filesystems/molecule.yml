@@ -55,48 +55,48 @@ platforms:
       - "customize ['createhd', '--filename', 'hdd11.vdi', '--size', 1 * 1024]"
       - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd11.vdi']"
     provision: no
-  # - name: ubuntu-20.04
-  #   config_options:
-  #     ssh.keep_alive: yes
-  #     ssh.remote_user: "'vagrant'"
-  #   box: ubuntu/focal64
-  #   memory: 512
-  #   cpus: 1
-  #   provider_raw_config_args:
-  #     - "customize ['createhd', '--filename', 'hdd12.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd12.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd13.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd13.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd14.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd14.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd15.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd15.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd16.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 7, '--device', 0, '--type', 'hdd', '--medium', 'hdd16.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd17.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 8, '--device', 0, '--type', 'hdd', '--medium', 'hdd17.vdi']"
-  #   provision: no
-  # - name: ubuntu-18.04
-  #   config_options:
-  #     ssh.keep_alive: yes
-  #     ssh.remote_user: "'vagrant'"
-  #   box: ubuntu/bionic64
-  #   memory: 512
-  #   cpus: 1
-  #   provider_raw_config_args:
-  #     - "customize ['createhd', '--filename', 'hdd18.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd18.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd19.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd19.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd20.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd20.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd21.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd21.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd22.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 7, '--device', 0, '--type', 'hdd', '--medium', 'hdd22.vdi']"
-  #     - "customize ['createhd', '--filename', 'hdd23.vdi', '--size', 1 * 1024]"
-  #     - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 8, '--device', 0, '--type', 'hdd', '--medium', 'hdd23.vdi']"
-  #   provision: no
+  - name: ubuntu-20.04
+    config_options:
+      ssh.keep_alive: yes
+      ssh.remote_user: "'vagrant'"
+    box: ubuntu/focal64
+    memory: 512
+    cpus: 1
+    provider_raw_config_args:
+      - "customize ['createhd', '--filename', 'hdd12.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd12.vdi']"
+      - "customize ['createhd', '--filename', 'hdd13.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd13.vdi']"
+      - "customize ['createhd', '--filename', 'hdd14.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd14.vdi']"
+      - "customize ['createhd', '--filename', 'hdd15.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd15.vdi']"
+      - "customize ['createhd', '--filename', 'hdd16.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 7, '--device', 0, '--type', 'hdd', '--medium', 'hdd16.vdi']"
+      - "customize ['createhd', '--filename', 'hdd17.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 8, '--device', 0, '--type', 'hdd', '--medium', 'hdd17.vdi']"
+    provision: no
+  - name: ubuntu-18.04
+    config_options:
+      ssh.keep_alive: yes
+      ssh.remote_user: "'vagrant'"
+    box: ubuntu/bionic64
+    memory: 512
+    cpus: 1
+    provider_raw_config_args:
+      - "customize ['createhd', '--filename', 'hdd18.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd18.vdi']"
+      - "customize ['createhd', '--filename', 'hdd19.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd19.vdi']"
+      - "customize ['createhd', '--filename', 'hdd20.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd20.vdi']"
+      - "customize ['createhd', '--filename', 'hdd21.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd21.vdi']"
+      - "customize ['createhd', '--filename', 'hdd22.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 7, '--device', 0, '--type', 'hdd', '--medium', 'hdd22.vdi']"
+      - "customize ['createhd', '--filename', 'hdd23.vdi', '--size', 1 * 1024]"
+      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 8, '--device', 0, '--type', 'hdd', '--medium', 'hdd23.vdi']"
+    provision: no
 
 provisioner:
   name: ansible
