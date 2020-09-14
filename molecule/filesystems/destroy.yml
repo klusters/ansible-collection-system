@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   vars:
-    terraform_dir: 'terraform'
+    terraform_dir: '/github/workspace/terraform'
   tasks:
   - name: Terraform destroy
     terraform:
