@@ -1,0 +1,12 @@
+---
+- name: Destroy
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    terraform_dir: '{{ playbook_dir }}/../../terraform'
+  tasks:
+    - name: Terraform destroy
+      terraform:
+        project_path: '{{ terraform_dir }}'
+        state: absent

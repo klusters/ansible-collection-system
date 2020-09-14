@@ -1,0 +1,27 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    terraform_dir: '{{ playbook_dir }}/../../terraform'
+
+  pre_tasks:
+  - name: Get Terraform scripts
+    git:
+      repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
+      dest: '{{ terraform_dir }}'
+      version: master
+
+  tasks:
+  - name: Generate Terraform vars
+    copy:
+      dest: '{{ terraform_dir }}/terraform.tfvars.json'
+      content: "{{ molecule_yml.platforms[0] }}"
+
+  - name: Terraform apply
+    terraform:
+      project_path: '{{ terraform_dir }}'
+      force_init: yes
+      state: present

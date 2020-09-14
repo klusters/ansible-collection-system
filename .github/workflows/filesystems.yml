@@ -1,0 +1,49 @@
+name: "klusters.system.etc_hosts"
+
+on:
+  push:
+    paths:
+      - 'roles/filesystems/**'
+      - 'molecule/filesystems/**'
+      - '.github/workflows/filesystems.yml'
+      - 'molecule/common/**'
+  pull_request:
+    paths:
+      - 'roles/filesystems/**'
+      - 'molecule/filesystems/**'
+      - '.github/workflows/filesystems.yml'
+      - 'molecule/common/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        collection_role:
+          - filesystems
+        # molecule_distro:
+        #   - { "distro":"centos:7", "command":"/usr/sbin/init" }
+        #   - { "distro":"centos:8", "command":"/usr/sbin/init" }
+        #   - { "distro":"ubuntu:18.04", "command":"/lib/systemd/systemd" }
+        #   - { "distro":"ubuntu:20.04", "command":"/lib/systemd/systemd" }
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
+      # MOLECULE_COMMAND: ${{ matrix.molecule_distro.command }}
+      # MOLECULE_DISTRO: ${{ matrix.molecule_distro.distro }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: ansible_collections/klusters/system
+
+      - uses: finnp/create-file-action@master
+        with:
+          FILE_NAME: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
+          FILE_DATA: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
+
+      - uses: gofrolist/molecule-action@v2
+        with:
+          molecule_working_dir: ansible_collections/klusters/system
+          molecule_args: -s ${{ matrix.collection_role }}

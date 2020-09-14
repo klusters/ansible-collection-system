@@ -6,3 +6,8 @@
         msg: "{{ ansible_devices.keys() }}"
   roles:
     - role: klusters.system.filesystems
+  post_tasks:
+    - name: gather
+      setup:
+    - debug:
+        msg: "{{ ansible_mounts }}"
