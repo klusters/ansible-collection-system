@@ -40,8 +40,9 @@ jobs:
 
       - uses: finnp/create-file-action@master
         with:
-          FILE_NAME: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
-          FILE_DATA: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
+          env:
+            FILE_NAME: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
+            FILE_DATA: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
 
       - uses: gofrolist/molecule-action@v2
         with:
