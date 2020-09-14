@@ -4,6 +4,10 @@
   hosts: all
   gather_facts: no
   tasks:
+  - name: Install gce dependency on controlling host (virtualenv)
+    pip:
+      name: google-auth
+    delegate_to: 127.0.0.1
   - name: Wait for system to become reachable
     wait_for_connection:
       timeout: 60
