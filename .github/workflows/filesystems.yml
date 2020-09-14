@@ -42,6 +42,10 @@ jobs:
         with:
           path: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
           contents: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
+      
+      - uses: little-core-labs/install-terraform@v1
+        with:
+          version: 0.12.29
 
       - uses: gofrolist/molecule-action@v2
         with:

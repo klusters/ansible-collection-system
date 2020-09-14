@@ -19,6 +19,7 @@
     copy:
       dest: '{{ terraform_dir }}/terraform.tfvars.json'
       content: "{{ molecule_yml.platforms[0] }}"
+      mode: '644'
 
   - name: Terraform apply
     terraform:
