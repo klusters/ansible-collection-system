@@ -1,4 +1,4 @@
-name: "klusters.system.etc_hosts"
+name: "klusters.system.filesystems"
 
 on:
   push:
@@ -50,4 +50,5 @@ jobs:
       - uses: gofrolist/molecule-action@v2
         with:
           molecule_working_dir: ansible_collections/klusters/system
-          molecule_args: --debug -s ${{ matrix.collection_role }}
+          molecule_args: -s ${{ matrix.collection_role }}
+          molecule_options: --debug
