@@ -6,7 +6,8 @@
   vars:
     terraform_dir: '{{ playbook_dir }}/../../terraform'
   tasks:
-    - name: Terraform destroy
-      terraform:
-        project_path: '{{ terraform_dir }}'
-        state: absent
+  - name: Terraform destroy
+    terraform:
+      binary_path: "{{ lookup('env','TERRAFORM_PATH')|default(omit) }}"
+      project_path: '{{ terraform_dir }}'
+      state: absent

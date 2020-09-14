@@ -23,6 +23,7 @@
 
   - name: Terraform apply
     terraform:
+      binary_path: "{{ lookup('env','TERRAFORM_PATH')|default(omit) }}"
       project_path: '{{ terraform_dir }}'
       force_init: yes
       state: present

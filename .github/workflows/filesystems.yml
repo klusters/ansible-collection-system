@@ -43,7 +43,7 @@ jobs:
           path: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
           contents: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
       
-      - name: Setup Terraform
+      - id: setup-terraform
         uses: autero1/action-terraform@v0.1.0
         with:
           terraform_version: 0.12.29
@@ -52,3 +52,5 @@ jobs:
         with:
           molecule_working_dir: ansible_collections/klusters/system
           molecule_args: -s ${{ matrix.collection_role }}
+        env: 
+          TERRAFORM_PATH: ${{ steps.setup-terraform.outputs.terraform_path }}
