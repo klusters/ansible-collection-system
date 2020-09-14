@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    terraform_dir: '{{ playbook_dir }}/../../terraform'
+    terraform_dir: 'ansible_collections/klusters/system/terraform'
 
   pre_tasks:
   - name: Get Terraform scripts
