@@ -38,11 +38,10 @@ jobs:
         with:
           path: ansible_collections/klusters/system
 
-      - uses: finnp/create-file-action@master
+      - uses: DamianReeves/write-file-action@v1.0
         with:
-          env:
-            FILE_NAME: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
-            FILE_DATA: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
+          path: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
+          contents: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
 
       - uses: gofrolist/molecule-action@v2
         with:
