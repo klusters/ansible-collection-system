@@ -3,11 +3,19 @@
 - name: Prepare
   hosts: all
   gather_facts: no
-  tasks:
+  pre_tasks:
+
   - name: Install gce dependency on controlling host (virtualenv)
     pip:
-      name: google-auth
+      name:
+      - google-auth
+      - jmespath
     delegate_to: 127.0.0.1
+
+  - name: Refresh inventory
+    meta: refresh_inventory
+
+  tasks:
   - name: Wait for system to become reachable
     wait_for_connection:
       timeout: 60

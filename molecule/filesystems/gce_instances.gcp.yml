@@ -1,12 +1,11 @@
 plugin: gcp_compute
 projects:
-  - ${MOLECULE_GCP_PROJECT_ID}
+  - feisty-catcher-261412
 filters: []
 auth_kind: serviceaccount
 scopes:
  - 'https://www.googleapis.com/auth/cloud-platform'
  - 'https://www.googleapis.com/auth/compute.readonly'
-# service_account_file: ${GCP_SERVICE_ACCOUNT_FILE}
 hostnames:
   - name
 compose:

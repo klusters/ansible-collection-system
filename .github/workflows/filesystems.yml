@@ -37,18 +37,39 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: ansible_collections/klusters/system
-
-      - uses: DamianReeves/write-file-action@v1.0
-        with:
-          path: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
-          contents: ${{ secrets.MOLECULE_GCP_CREDENTIALS }}
       
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.12.29
 
-      - uses: gofrolist/molecule-action@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
         with:
-          molecule_working_dir: ansible_collections/klusters/system
-          molecule_args: -s ${{ matrix.collection_role }}
-          molecule_options: --debug
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install molecule yamllint ansible-lint google-auth
+
+      - name: Setup gcloud environment
+        uses: GoogleCloudPlatform/github-actions@0.1.2
+        with:
+          project_id: ${{ secrets.GCLOUD_PROJECT }}
+          service_account_key: ${{ secrets.GCLOUD_KEYFILE_JSON }}
+          export_default_credentials: true
+
+      - name: Run role tests
+        run: >-
+          molecule --version &&
+          ansible --version &&
+          molecule test -s ${{ matrix.collection_role }}
+        working-directory: ansible_collections/klusters/system
+        env:
+          TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
+          GCP_SERVICE_ACCOUNT_CONTENTS: ${{ secrets.GCLOUD_KEYFILE_JSON }}
+      # - uses: gofrolist/molecule-action@v2
+      #   with:
+      #     molecule_working_dir: ansible_collections/klusters/system
+      #     molecule_args: -s ${{ matrix.collection_role }}
+      #     molecule_options: --debug

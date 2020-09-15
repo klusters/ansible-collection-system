@@ -4,10 +4,10 @@
   connection: local
   gather_facts: false
   vars:
-    terraform_dir: '/github/workspace/terraform'
+    terraform_dir: '{{ playbook_dir }}/terraform'
   tasks:
   - name: Terraform destroy
     terraform:
-      binary_path: "{{ lookup('env','TERRAFORM_PATH')|default(omit) }}"
+      binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
       project_path: '{{ terraform_dir }}'
       state: absent
