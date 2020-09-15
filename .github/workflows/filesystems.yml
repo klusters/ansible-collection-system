@@ -52,9 +52,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install molecule yamllint ansible-lint google-auth
 
-      - id: gcloud
-        name: Setup gcloud environment
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: Setup gcloud environment
+        uses: GoogleCloudPlatform/github-actions@0.1.2
         with:
           project_id: ${{ secrets.GCLOUD_PROJECT }}
           service_account_key: ${{ secrets.GCLOUD_KEYFILE_JSON }}
@@ -64,10 +63,13 @@ jobs:
         run: >-
           molecule --version &&
           ansible --version &&
-          gcloud auth list &&
           molecule test -s ${{ matrix.collection_role }}
         working-directory: ansible_collections/klusters/system
         env:
           TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
-          GCP_SERVICE_ACCOUNT_FILE: ${{ steps.gcloud.env.GOOGLE_APPLICATION_CREDENTIALS }}
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.gcloud.env.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCP_SERVICE_ACCOUNT_CONTENTS: ${{ secrets.GCLOUD_KEYFILE_JSON }}
+      # - uses: gofrolist/molecule-action@v2
+      #   with:
+      #     molecule_working_dir: ansible_collections/klusters/system
+      #     molecule_args: -s ${{ matrix.collection_role }}
+      #     molecule_options: --debug
