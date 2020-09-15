@@ -28,4 +28,5 @@
       project_path: '{{ terraform_dir }}'
       state: present
     environment:
+      TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
       GOOGLE_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
