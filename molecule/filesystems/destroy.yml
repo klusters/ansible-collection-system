@@ -7,10 +7,10 @@
     terraform_dir: '{{ playbook_dir }}/terraform_destroy'
   pre_tasks:
   - name: Get Terraform scripts
-  git:
-    repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
-    dest: '{{ terraform_dir }}'
-    version: master
+    git:
+      repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
+      dest: '{{ terraform_dir }}'
+      version: master
 
   tasks:
   - name: Terraform destroy
