@@ -56,7 +56,7 @@ jobs:
         uses: GoogleCloudPlatform/github-actions@0.1.2
         with:
           project_id: feisty-catcher-261412
-          service_account_key: ${{ secrets.GCLOUD_KEYFILE_JSON }}
+          service_account_key: ${{ secrets.GKEY }}
           export_default_credentials: true
 
       - name: Run role tests
@@ -64,14 +64,11 @@ jobs:
           molecule --version
           ansible --version
           terraform --version
-          pwd
-          ls -l
-          cat $GOOGLE_APPLICATION_CREDENTIALS
           molecule test -s ${{ matrix.collection_role }}
         working-directory: ansible_collections/klusters/system
         env:
           TF_VAR_project_id: feisty-catcher-261412
-          GCP_SERVICE_ACCOUNT_FILE: $GOOGLE_APPLICATION_CREDENTIALS
+          GCP_SERVICE_ACCOUNT_CONTENT: $GOOGLE_APPLICATION_CREDENTIALS
       # - uses: gofrolist/molecule-action@v2
       #   with:
       #     molecule_working_dir: ansible_collections/klusters/system
