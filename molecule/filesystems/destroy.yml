@@ -11,3 +11,6 @@
       binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
       project_path: '{{ terraform_dir }}'
       state: absent
+    environment:
+      TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
+      GOOGLE_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
