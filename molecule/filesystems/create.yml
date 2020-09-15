@@ -27,3 +27,5 @@
       force_init: yes
       project_path: '{{ terraform_dir }}'
       state: present
+    environment:
+      GOOGLE_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS')}}"
