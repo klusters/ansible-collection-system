@@ -68,7 +68,10 @@ jobs:
         working-directory: ansible_collections/klusters/system
         env:
           TF_VAR_project_id: feisty-catcher-261412
-          GCP_SERVICE_ACCOUNT_CONTENT: $GOOGLE_APPLICATION_CREDENTIALS
+          GCP_SERVICE_ACCOUNT_CONTENTS: $GOOGLE_APPLICATION_CREDENTIALS
+          GOOGLE_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS
+          GOOGLE_CLOUD_KEYFILE_JSON: $GOOGLE_APPLICATION_CREDENTIALS
+          GCLOUD_KEYFILE_JSON: $GOOGLE_APPLICATION_CREDENTIALS
       # - uses: gofrolist/molecule-action@v2
       #   with:
       #     molecule_working_dir: ansible_collections/klusters/system
