@@ -60,9 +60,13 @@ jobs:
           export_default_credentials: true
 
       - name: Run role tests
-        run: >-
-          molecule --version &&
-          ansible --version &&
+        run: |
+          molecule --version
+          ansible --version
+          terraform --version
+          pwd
+          ls -l
+          cat $GOOGLE_APPLICATION_CREDENTIALS
           molecule test -s ${{ matrix.collection_role }}
         working-directory: ansible_collections/klusters/system
         env:
