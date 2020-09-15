@@ -63,6 +63,7 @@ jobs:
         run: >-
           molecule --version &&
           ansible --version &&
+          gcloud auth list &&
           molecule test -s ${{ matrix.collection_role }}
         working-directory: ansible_collections/klusters/system
         env:
