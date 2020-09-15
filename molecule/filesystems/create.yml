@@ -5,7 +5,7 @@
   gather_facts: false
   become: yes
   vars:
-    terraform_dir: '{{ playbook_dir }}/terraform'
+    terraform_dir: '{{ playbook_dir }}/terraform_apply'
 
   pre_tasks:
   - name: Get Terraform scripts

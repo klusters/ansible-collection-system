@@ -4,7 +4,14 @@
   connection: local
   gather_facts: false
   vars:
-    terraform_dir: '{{ playbook_dir }}/terraform'
+    terraform_dir: '{{ playbook_dir }}/terraform_destroy'
+  pre_taks:
+  - name: Get Terraform scripts
+  git:
+    repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
+    dest: '{{ terraform_dir }}'
+    version: master
+
   tasks:
   - name: Terraform destroy
     terraform:
