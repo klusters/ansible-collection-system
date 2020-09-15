@@ -68,6 +68,7 @@ jobs:
         env:
           TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
           GCP_SERVICE_ACCOUNT_CONTENTS: ${{ secrets.GCLOUD_KEYFILE_JSON }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_KEYFILE_JSON }}
       # - uses: gofrolist/molecule-action@v2
       #   with:
       #     molecule_working_dir: ansible_collections/klusters/system
