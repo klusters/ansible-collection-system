@@ -69,5 +69,5 @@ jobs:
         working-directory: ansible_collections/klusters/system
         env:
           TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
-          GCP_SERVICE_ACCOUNT_FILE: ${{ jobs.gcloud.env.GOOGLE_APPLICATION_CREDENTIALS }}
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ jobs.gcloud.env.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCP_SERVICE_ACCOUNT_FILE: ${{ steps.gcloud.env.GOOGLE_APPLICATION_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.gcloud.env.GOOGLE_APPLICATION_CREDENTIALS }}
