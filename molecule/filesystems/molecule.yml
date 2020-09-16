@@ -11,14 +11,14 @@ lint: |
   ansible-lint
 
 platforms:
-- name: instance-offloading-001
-  instance_name: instance-offloading
+- name: ${MOLECULE_DISTRO}-001
+  instance_name: ${MOLECULE_DISTRO}
   region: europe-west1
-  zone: europe-west1-c
   network: default
   subnetwork: default
   machine_type: f1-micro
-  image: centos-7
+  image: ${MOLECULE_DISTRO}
+  image_project: ${MOLECULE_DISTRO_PROJECT}
   additional_disks:
   - auto_delete: yes
     boot: no
@@ -87,6 +87,7 @@ provisioner:
   connection_options:
     ansible_ssh_user: "github-ci"
     ansible_ssh_private_key_file: "/opt/hostedtoolcache/eg-test-molecule.pem"
+    ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
   ansible_args:
     - --inventory=./gce_instances.gcp.yml
 

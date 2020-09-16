@@ -22,16 +22,16 @@ jobs:
       matrix:
         collection_role:
           - filesystems
-        # molecule_distro:
-        #   - { "distro":"centos:7", "command":"/usr/sbin/init" }
-        #   - { "distro":"centos:8", "command":"/usr/sbin/init" }
-        #   - { "distro":"ubuntu:18.04", "command":"/lib/systemd/systemd" }
-        #   - { "distro":"ubuntu:20.04", "command":"/lib/systemd/systemd" }
+        molecule_distro:
+          - { "image_family": "centos-7", "image_project": "centos-cloud" }
+          - { "image_family": "centos-8", "image_project": "centos-cloud" }
+          - { "image_family": "ubuntu-1804-lts", "image_project": "ubuntu-os-cloud" }
+          - { "image_family": "ubuntu-2004-lts", "image_project": "ubuntu-os-cloud" }
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
-      # MOLECULE_COMMAND: ${{ matrix.molecule_distro.command }}
-      # MOLECULE_DISTRO: ${{ matrix.molecule_distro.distro }}
+      MOLECULE_DISTRO: ${{ matrix.molecule_distro.image_family }}
+      MOLECULE_DISTRO_PROJECT: ${{ matrix.molecule_distro.image_project }}
 
     steps:
       - uses: actions/checkout@v2
@@ -69,8 +69,3 @@ jobs:
         env:
           TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
           GCP_SERVICE_ACCOUNT_FILE: $GOOGLE_APPLICATION_CREDENTIALS
-      # - uses: gofrolist/molecule-action@v2
-      #   with:
-      #     molecule_working_dir: ansible_collections/klusters/system
-      #     molecule_args: -s ${{ matrix.collection_role }}
-      #     molecule_options: --debug
