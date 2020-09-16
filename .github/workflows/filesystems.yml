@@ -18,7 +18,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
       matrix:
         collection_role:
           - filesystems
@@ -53,7 +52,7 @@ jobs:
           pip install molecule yamllint ansible-lint google-auth
 
       - name: Setup gcloud environment
-        uses: GoogleCloudPlatform/github-actions@0.1.2
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           project_id: ${{ secrets.GCLOUD_PROJECT }}
           service_account_key: ${{ secrets.GCLOUD_KEYFILE_JSON }}

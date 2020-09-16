@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   vars:
-    terraform_dir: '{{ playbook_dir }}/terraform_destroy'
+    terraform_dir: "{{ playbook_dir }}/terraform/{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
   pre_tasks:
   - name: Get Terraform scripts
     git:
@@ -17,7 +17,6 @@
     terraform:
       binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
       project_path: '{{ terraform_dir }}'
-      force_init: yes
       workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
       state: absent
     environment:
