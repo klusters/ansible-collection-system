@@ -22,4 +22,5 @@
     environment:
       TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
       GOOGLE_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
-      TF_VAR_ssh_key_name: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') + '-001' |default('dummy') }}"
+      TF_VAR_ssh_key_name: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') + '-001' | default(omit) }}"
+      TF_VAR_ssh_key_path: "{{ lookup('env','GITHUB_WORKSPACE') | default(omit) }}"
