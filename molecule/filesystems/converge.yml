@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
   pre_tasks:
     - debug:
         msg: "{{ ansible_devices.keys() }}"
