@@ -5,7 +5,7 @@
   gather_facts: false
   become: yes
   vars:
-    terraform_dir: "{{ playbook_dir }}/terraform/{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
+    terraform_dir: "{{ playbook_dir }}/terraform_create/{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
 
   pre_tasks:
   - name: Get Terraform scripts
