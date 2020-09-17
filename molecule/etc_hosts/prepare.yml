@@ -1,7 +1,7 @@
 ---
 
 - name: Prepare
-  hosts: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
+  hosts: "{{ lookup('env','GITHUB_RUN_NUMBER') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
   gather_facts: no
 
   pre_tasks:

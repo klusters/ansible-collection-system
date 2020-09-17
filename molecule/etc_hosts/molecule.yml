@@ -11,8 +11,8 @@ lint: |
   ansible-lint
 
 platforms:
-- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}-001
-  instance_name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+- name: ${GITHUB_RUN_NUMBER}-${MOLECULE_DISTRO}-001
+  instance_name: ${GITHUB_RUN_NUMBER}-${MOLECULE_DISTRO}
   region: europe-west1
   network: default
   subnetwork: default

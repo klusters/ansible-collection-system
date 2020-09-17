@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
+  hosts: "{{ lookup('env','GITHUB_RUN_NUMBER') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
 
   roles:
     - role: klusters.system.etc_hosts

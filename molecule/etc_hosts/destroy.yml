@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   vars:
-    terraform_dir: "/opt/hostedtoolcache/terraform_destroy/{{ lookup('env','MOLECULE_SCENARIO_NAME') +
+    terraform_dir: "/opt/hostedtoolcache/terraform_destroy/{{ lookup('env','GITHUB_RUN_NUMBER') +
     '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
 
   pre_tasks:
@@ -20,7 +20,7 @@
       binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
       force_init: yes
       project_path: '{{ terraform_dir }}'
-      workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
+      workspace: "{{ lookup('env','GITHUB_RUN_NUMBER') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
       state: absent
     environment:
       TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
