@@ -21,7 +21,3 @@
       project_path: '{{ terraform_dir }}'
       workspace: "{{ lookup('env','MOLECULE_DISTRO') + '-' + lookup('env','GITHUB_RUN_NUMBER') |default('default') }}"
       state: absent
-    environment:
-      TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
-      TF_VAR_ssh_public_key: "{{ lookup('env','TF_VAR_ssh_public_key') }}"
-      GOOGLE_APPLICATION_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
