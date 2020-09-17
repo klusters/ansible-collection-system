@@ -9,8 +9,8 @@ scopes:
 groups:
   centos_7: "'centos-7' in disks[0].licenses[0]"
   centos_8: "'centos-8' in disks[0].licenses[0]"
-  ubuntu_1804: "'ubuntu-1804' in disks[0].licenses[0]"
-  ubuntu_2004: "'ubuntu-2004' in disks[0].licenses[0]"
+  ubuntu_1804_lts: "'ubuntu-1804' in disks[0].licenses[0]"
+  ubuntu_2004_lts: "'ubuntu-2004' in disks[0].licenses[0]"
 hostnames:
   - name
 compose:
