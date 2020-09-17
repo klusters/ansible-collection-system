@@ -3,7 +3,6 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  become: yes
   vars:
     terraform_dir: "/opt/hostedtoolcache/terraform_create/{{ lookup('env','MOLECULE_SCENARIO_NAME') +
     '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
