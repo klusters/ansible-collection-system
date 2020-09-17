@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
+  hosts: "{{ lookup('env','MOLECULE_SCENARIO_NAME') | regex_replace('_','') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
 
   roles:
     - role: klusters.system.etc_hosts
