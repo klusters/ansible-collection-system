@@ -39,12 +39,28 @@ ansible-playbook playbook_name.yml
 
 Testing is done through GitHub Actions, and can be tested locally as well.
 
+To be able to test locally:
+- install docker 
+- install [nektos/act](https://github.com/nektos/act)
+- download the huge docker image (18GB) : [nektos/act-environments-ubuntu:18.04](https://hub.docker.com/r/nektos/act-environments-ubuntu/tags)
+
+For example, on MacOS:
+```bash
+brew cask install docker
+
+brew install nektos/tap/act
+
+open /Applications/Docker.app
+docker pull nektos/act-environments-ubuntu:18.04
+```
+
 Each workflow pertains to a single role, and can be launched locally using the following command:
 
 ```bash
-MOLECULE_COMMAND={{ matrix.molecule_distro.command }} \
-MOLECULE_DISTRO={{ matrix.molecule_distro.distro }} \
-molecule test -s {{ matrix.collection_role }}
-```
+export GCLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
+export GCLOUD_KEYFILE_JSON=$(cat <YOUR_GCP_SERVICE_ACCOUNT_CREDENTIALS_FILE>)
 
-To decide on the `MOLECULE_COMMAND` value please refer to the `.github/workflow/{{ collection_role }}.yml` file as it will have the value for proper systemd services.
+act -s GCLOUD_PROJECT -s GCLOUD_KEYFILE_JSON \
+-W .github/workflows/<WORKFLOW_FILE_TO_RUN> \
+-P ubuntu-latest=nektos/act-environments-ubuntu:18.04
+```
