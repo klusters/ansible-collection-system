@@ -4,8 +4,7 @@
   connection: local
   gather_facts: false
   vars:
-    terraform_dir: "/opt/hostedtoolcache/terraform_create/{{ lookup('env','MOLECULE_SCENARIO_NAME') +
-    '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
+    terraform_dir: "{{ playbook_dir }}/../terraform"
 
   pre_tasks:
   - name: Get Terraform scripts
