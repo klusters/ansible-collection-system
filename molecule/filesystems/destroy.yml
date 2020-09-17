@@ -24,6 +24,5 @@
       state: absent
     environment:
       TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
-      GOOGLE_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
-      TF_VAR_ssh_key_name: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') + '-001' | default(omit) }}"
-      TF_VAR_ssh_key_path: "/opt/hostedtoolcache/ssh_{{ lookup('env','MOLECULE_DISTRO') }}"
+      TF_VAR_ssh_public_key: "{{ lookup('env','TF_VAR_ssh_public_key') }}"
+      GOOGLE_APPLICATION_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
