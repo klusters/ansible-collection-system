@@ -11,8 +11,8 @@ lint: |
   ansible-lint
 
 platforms:
-- name: ${GITHUB_RUN_NUMBER}-${MOLECULE_DISTRO}-001
-  instance_name: ${GITHUB_RUN_NUMBER}-${MOLECULE_DISTRO}
+- name: ${MOLECULE_DISTRO}-${GITHUB_RUN_NUMBER}-001
+  instance_name: ${MOLECULE_DISTRO}-${GITHUB_RUN_NUMBER}
   region: europe-west1
   network: default
   subnetwork: default

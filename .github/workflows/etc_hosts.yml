@@ -61,7 +61,7 @@ jobs:
           export_default_credentials: true
 
       - name: Run tests
-        run : |
+        run: |
           ssh-keygen -m PEM -t rsa -b 4096 -f ${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER} -P ''
           export TF_VAR_ssh_public_key=${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}.pub
           echo $TF_VAR_ssh_public_key
