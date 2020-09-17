@@ -1,12 +1,12 @@
 name: "klusters.system.filesystems"
 
 on:
-  # push:
-  #   paths:
-  #     - 'roles/filesystems/**'
-  #     - 'molecule/filesystems/**'
-  #     - '.github/workflows/filesystems.yml'
-  #     - 'molecule/common/**'
+  push:
+    paths:
+      - 'roles/filesystems/**'
+      - 'molecule/filesystems/**'
+      - '.github/workflows/filesystems.yml'
+      - 'molecule/common/**'
   pull_request:
     paths:
       - 'roles/filesystems/**'
