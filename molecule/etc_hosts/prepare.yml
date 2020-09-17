@@ -1,7 +1,7 @@
 ---
 
 - name: Prepare
-  hosts: "{{ lookup('env','MOLECULE_DISTRO') }}-{{ lookup('env','GITHUB_RUN_NUMBER') }}-001"
+  hosts: all
   gather_facts: no
 
   pre_tasks:

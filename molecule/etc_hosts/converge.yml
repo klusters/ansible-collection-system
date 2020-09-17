@@ -1,6 +1,8 @@
 ---
 - name: Converge
-  hosts: "{{ lookup('env','MOLECULE_DISTRO') }}-{{ lookup('env','GITHUB_RUN_NUMBER') }}-001"
+  hosts: all
+  gather_facts: no
+  strategy: free
 
   roles:
     - role: klusters.system.etc_hosts
