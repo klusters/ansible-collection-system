@@ -1,114 +1,101 @@
 ---
+
 dependency:
   name: galaxy
+
 driver:
-  name: vagrant
-  provider:
-    name: virtualbox
+  name: delegated
 
 lint: |
   yamllint .
   ansible-lint
 
 platforms:
-  - name: centos-7
-    config_options:
-      ssh.keep_alive: yes
-      ssh.remote_user: "'vagrant'"
-    box: centos/7
-    memory: 512
-    cpus: 1
-    provider_raw_config_args:
-      - "customize ['storagectl', :id, '--name', 'SATA0', '--add', 'sata']"
-      - "customize ['createhd', '--filename', 'hdd00.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA0', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', 'hdd00.vdi']"
-      - "customize ['createhd', '--filename', 'hdd01.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA0', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', 'hdd01.vdi']"
-      - "customize ['createhd', '--filename', 'hdd02.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA0', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd02.vdi']"
-      - "customize ['createhd', '--filename', 'hdd03.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA0', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd03.vdi']"
-      - "customize ['createhd', '--filename', 'hdd04.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA0', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd04.vdi']"
-      - "customize ['createhd', '--filename', 'hdd05.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA0', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd05.vdi']"
-    provision: no
-  - name: centos-8
-    config_options:
-      ssh.keep_alive: yes
-      ssh.remote_user: "'vagrant'"
-    box: centos/8
-    memory: 512
-    cpus: 1
-    provider_raw_config_args:
-      - "customize ['storagectl', :id, '--name', 'SATA1', '--add', 'sata']"
-      - "customize ['createhd', '--filename', 'hdd06.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', 'hdd06.vdi']"
-      - "customize ['createhd', '--filename', 'hdd07.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', 'hdd07.vdi']"
-      - "customize ['createhd', '--filename', 'hdd08.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd08.vdi']"
-      - "customize ['createhd', '--filename', 'hdd09.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd09.vdi']"
-      - "customize ['createhd', '--filename', 'hdd10.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd10.vdi']"
-      - "customize ['createhd', '--filename', 'hdd11.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SATA1', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd11.vdi']"
-    provision: no
-  - name: ubuntu-20.04
-    config_options:
-      ssh.keep_alive: yes
-      ssh.remote_user: "'vagrant'"
-    box: ubuntu/focal64
-    memory: 512
-    cpus: 1
-    provider_raw_config_args:
-      - "customize ['createhd', '--filename', 'hdd12.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd12.vdi']"
-      - "customize ['createhd', '--filename', 'hdd13.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd13.vdi']"
-      - "customize ['createhd', '--filename', 'hdd14.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd14.vdi']"
-      - "customize ['createhd', '--filename', 'hdd15.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd15.vdi']"
-      - "customize ['createhd', '--filename', 'hdd16.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 7, '--device', 0, '--type', 'hdd', '--medium', 'hdd16.vdi']"
-      - "customize ['createhd', '--filename', 'hdd17.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 8, '--device', 0, '--type', 'hdd', '--medium', 'hdd17.vdi']"
-    provision: no
-  - name: ubuntu-18.04
-    config_options:
-      ssh.keep_alive: yes
-      ssh.remote_user: "'vagrant'"
-    box: ubuntu/bionic64
-    memory: 512
-    cpus: 1
-    provider_raw_config_args:
-      - "customize ['createhd', '--filename', 'hdd18.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', 'hdd18.vdi']"
-      - "customize ['createhd', '--filename', 'hdd19.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', 'hdd19.vdi']"
-      - "customize ['createhd', '--filename', 'hdd20.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 5, '--device', 0, '--type', 'hdd', '--medium', 'hdd20.vdi']"
-      - "customize ['createhd', '--filename', 'hdd21.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 6, '--device', 0, '--type', 'hdd', '--medium', 'hdd21.vdi']"
-      - "customize ['createhd', '--filename', 'hdd22.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 7, '--device', 0, '--type', 'hdd', '--medium', 'hdd22.vdi']"
-      - "customize ['createhd', '--filename', 'hdd23.vdi', '--size', 1 * 1024]"
-      - "customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 8, '--device', 0, '--type', 'hdd', '--medium', 'hdd23.vdi']"
-    provision: no
+- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}-001
+  instance_name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+  region: europe-west1
+  network: default
+  subnetwork: default
+  machine_type: f1-micro
+  image: ${MOLECULE_DISTRO}
+  image_project: ${MOLECULE_DISTRO_PROJECT}
+  additional_disks:
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
+
+  - auto_delete: yes
+    boot: no
+    disk_size_gb: 1
+    disk_type: pd-standard
 
 provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-
+  connection_options:
+    ansible_ssh_user: "github-ci"
+    ansible_ssh_private_key_file: "~/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}"
+    ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+  ansible_args:
+    - --inventory=./gce_instances.gcp.yml
 
 scenario:
   name: filesystems
   test_sequence:
     - lint
-    - destroy
+    # - destroy
     - dependency
     - syntax
     - create
