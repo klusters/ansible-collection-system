@@ -20,7 +20,7 @@
     copy:
       dest: '{{ terraform_dir }}/terraform.tfvars.json'
       content: "{{ molecule_yml.platforms[0] }}"
-      mode: '644'
+      mode: '0644'
 
   - name: Terraform apply
     terraform:
@@ -33,13 +33,3 @@
       TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
       GOOGLE_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
       TF_VAR_ssh_key_name: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') + '-001' | default(omit) }}"
-
-  - name: list dir
-    find:
-      paths: /opt/hostedtoolcache/ssh
-      recurse: yes
-    register: ssh_files
-
-  - debug:
-      msg: "{{ item }}"
-    with_items: "{{ ssh_files.files }}"

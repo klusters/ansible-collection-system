@@ -8,16 +8,6 @@
     '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
 
   pre_tasks:
-  - name: list dir
-    find:
-      paths: /opt/hostedtoolcache/ssh
-      recurse: yes
-    register: ssh_files
-
-  - debug:
-      msg: "{{ item }}"
-    with_items: "{{ ssh_files.files }}"
-
   - name: Get Terraform scripts
     git:
       repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
