@@ -7,8 +7,8 @@ Ansible collection that holds roles, that can be used to configure common system
 
 | Role      | Build Status                                                                                                                                                                                                                                                        | Documentation                                                                                          |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-|  etc_hosts   | ![klusters.system.etc_hosts](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.etc_hosts/badge.svg)          | [Documentation](https://github.com/klusters/system/tree/docs/roles/etc_hosts)    |
-|  filesystems   | ![klusters.system.filesystems](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.filesystems/badge.svg)      | [Documentation](https://github.com/klusters/system/tree/docs/roles/filesystems)    |
+|  etc_hosts   | ![klusters.system.etc_hosts](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.etc_hosts/badge.svg)          | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/etc_hosts)    |
+|  filesystems   | ![klusters.system.filesystems](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.filesystems/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/filesystems)    |
 
 ## Usage
 
