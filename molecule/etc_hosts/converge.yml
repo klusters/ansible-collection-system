@@ -4,5 +4,8 @@
   gather_facts: no
   strategy: free
 
+  vars:
+    role_etc_hosts_group: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('-','_') }}"
+
   roles:
     - role: klusters.system.etc_hosts
