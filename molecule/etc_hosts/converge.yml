@@ -1,9 +1,11 @@
 ---
 - name: Converge
-  hosts: all
-  gather_facts: false
+  hosts: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('-','_') }}"
+  gather_facts: no
+  strategy: free
+
+  vars:
+    role_etc_hosts_group: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('-','_') }}"
 
   roles:
     - role: klusters.system.etc_hosts
-      # Dry run : As in docker, we cannot edit /etc/hosts file
-      check_mode: yes

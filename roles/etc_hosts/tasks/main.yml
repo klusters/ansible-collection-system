@@ -6,7 +6,7 @@
     gather_subset: '!all,!min,default_ipv4'
   delegate_to: "{{ item }}"
   delegate_facts: yes
-  loop: "{{ groups['all'] }}"
+  loop: "{{ groups[role_etc_hosts_group] }}"
 
 - name: Add mappings to /etc/hosts
   become: yes

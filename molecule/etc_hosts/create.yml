@@ -3,6 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: no
+
   vars:
     terraform_dir: "{{ playbook_dir }}/../terraform"
 
@@ -25,9 +26,5 @@
       binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
       force_init: yes
       project_path: '{{ terraform_dir }}'
-      workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') |default('default') }}"
+      workspace: "{{ lookup('env','MOLECULE_DISTRO') + '-' + lookup('env','GITHUB_RUN_NUMBER') |default('default') }}"
       state: present
-    environment:
-      TF_VAR_project_id: "{{ lookup('env','TF_VAR_project_id') }}"
-      TF_VAR_ssh_public_key: "{{ lookup('env','TF_VAR_ssh_public_key') }}"
-      GOOGLE_APPLICATION_CREDENTIALS: "{{ lookup('env','GOOGLE_APPLICATION_CREDENTIALS') }}"
