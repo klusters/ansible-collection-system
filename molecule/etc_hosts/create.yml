@@ -2,11 +2,9 @@
 - name: Create
   hosts: localhost
   connection: local
-  gather_facts: false
-  become: yes
+  gather_facts: no
   vars:
-    terraform_dir: "/opt/hostedtoolcache/terraform_create/{{ lookup('env','MOLECULE_DISTRO') +
-      '-' + lookup('env','GITHUB_RUN_NUMBER') |default('default') |default('default') }}"
+    terraform_dir: "{{ playbook_dir }}/../terraform"
 
   pre_tasks:
   - name: Get Terraform scripts

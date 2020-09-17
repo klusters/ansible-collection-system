@@ -6,6 +6,11 @@ auth_kind: serviceaccount
 scopes:
  - 'https://www.googleapis.com/auth/cloud-platform'
  - 'https://www.googleapis.com/auth/compute.readonly'
+groups:
+  centos_7: "'centos-7' in disks[0].licenses[0]"
+  centos_8: "'centos-8' in disks[0].licenses[0]"
+  ubuntu_1804: "'ubuntu-1804' in disks[0].licenses[0]"
+  ubuntu_2004: "'ubuntu-2004' in disks[0].licenses[0]"
 hostnames:
   - name
 compose:
