@@ -10,6 +10,12 @@ This role is tested against :
   - CentOS 8
   - Ubuntu 18.04 & 20.04
 
+## Role Variables
+
+| Variable                 | Required | Default                                                                  | Comments                                        |
+| ------------------------ | -------- | ------------------------------------------------------------------------ | ----------------------------------------------- |
+| `role_etc_hosts_group`       | No       | `all`                                                                | Hosts group from inventory to put into /etc/hosts         |
+
 ## Examples
 
 ```yaml
