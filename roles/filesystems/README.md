@@ -75,7 +75,6 @@ This role will only configure block devices existing on the remote host, i.e. it
   - [x] Feat. : Add mkfs & mount options
   - [x] Feat. : Add LVM support (PV/VG/LV)
   - [ ] Feat. : Write fs' UUID to /etc/fstab to handle disordered block devices connection
-  - [ ] Feat. : Use var to handle block device naming rules (xvd/sd/vd)
   - [x] Feat. : Add documentation
   - [x] Feat. : Add vars to documentation
   - [x] Tests : Add GCP tests
