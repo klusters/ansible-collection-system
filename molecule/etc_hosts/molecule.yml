@@ -32,7 +32,7 @@ provisioner:
     - --inventory=./gce_instances.gcp.yml
 
 scenario:
-  name: filesystems
+  name: etc_hosts
   test_sequence:
     - lint
     # - destroy
