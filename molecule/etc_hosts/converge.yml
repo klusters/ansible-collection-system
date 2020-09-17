@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('_','-') }}"
+  hosts: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('-','_') }}"
   gather_facts: no
   strategy: free
 
