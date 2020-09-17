@@ -2,7 +2,7 @@
 # This is an example playbook to execute Ansible tests.
 
 - name: Verify
-  hosts: all
+  hosts: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}-{{ lookup('env','MOLECULE_DISTRO') }}-001"
   vars_files: ['../../roles/filesystems/defaults/main.yml']
   tasks:
   - name: Assert device is mounted
