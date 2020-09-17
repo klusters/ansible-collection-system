@@ -48,7 +48,7 @@ For example, on MacOS:
 ```bash
 brew cask install docker
 
-brew install nektos/tap/act
+brew install act
 
 open /Applications/Docker.app
 docker pull nektos/act-environments-ubuntu:18.04
