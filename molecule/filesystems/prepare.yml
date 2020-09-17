@@ -11,6 +11,11 @@
       - google-auth
       - jmespath
     delegate_to: 127.0.0.1
+  
+  - name: Fix ssh key permissions
+    file:
+      path: "/opt/hostedtoolcache/ssh/{{ lookup('env','TF_VAR_ssh_key_name') }}.pem"
+      mode: '0600'
 
   - name: Refresh inventory
     meta: refresh_inventory
