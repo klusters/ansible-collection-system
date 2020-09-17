@@ -63,8 +63,8 @@ jobs:
       - name: Run tests
         run : |
           ssh-keygen -m PEM -t rsa -b 4096 -f ${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER} -P ''
-          export SSH_PKEY_PATH=${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}.pub
-          echo $SSH_PKEY_PATH
+          export TF_VAR_ssh_public_key=${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}.pub
+          echo $TF_VAR_ssh_public_key
           molecule --version
           ansible --version
           terraform --version
@@ -73,4 +73,3 @@ jobs:
         env:
           TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
           GCP_SERVICE_ACCOUNT_FILE: $GOOGLE_APPLICATION_CREDENTIALS
-          TF_VAR_ssh_public_key: $SSH_PKEY_PATH
