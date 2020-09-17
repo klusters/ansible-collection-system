@@ -77,6 +77,6 @@ This role will only configure block devices existing on the remote host, i.e. it
   - [ ] Feat. : Write fs' UUID to /etc/fstab to handle disordered block devices connection
   - [ ] Feat. : Use var to handle block device naming rules (xvd/sd/vd)
   - [x] Feat. : Add documentation
-  - [ ] Feat. : Add vars to documentation
-  - [ ] Tests : Add GCP tests (via Molecule + Vagrant ?)
-  - [ ] Tests : Add AWS tests (via Molecule + Vagrant ?)
+  - [x] Feat. : Add vars to documentation
+  - [x] Tests : Add GCP tests
+  - [ ] Tests : Add AWS tests
