@@ -18,28 +18,58 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
       matrix:
         collection_role:
           - etc_hosts
         molecule_distro:
-          # Bug: Ansible cannot gather network facts on CentOS in Docker
-          # - { "distro":"centos:7", "command":"/usr/sbin/init" }
-          - { "distro":"centos:8", "command":"/usr/sbin/init" }
-          - { "distro":"ubuntu:18.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"ubuntu:20.04", "command":"/lib/systemd/systemd" }
+          - { "image_family": "centos-7", "image_project": "centos-cloud" }
+          - { "image_family": "centos-8", "image_project": "centos-cloud" }
+          - { "image_family": "ubuntu-1804-lts", "image_project": "ubuntu-os-cloud" }
+          - { "image_family": "ubuntu-2004-lts", "image_project": "ubuntu-os-cloud" }
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
-      MOLECULE_COMMAND: ${{ matrix.molecule_distro.command }}
-      MOLECULE_DISTRO: ${{ matrix.molecule_distro.distro }}
+      MOLECULE_DISTRO: ${{ matrix.molecule_distro.image_family }}
+      MOLECULE_DISTRO_PROJECT: ${{ matrix.molecule_distro.image_project }}
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Git checkout
+        uses: actions/checkout@v2
         with:
           path: ansible_collections/klusters/system
-
-      - uses: gofrolist/molecule-action@v2
+      
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
         with:
-          molecule_working_dir: ansible_collections/klusters/system
-          molecule_args: -s ${{ matrix.collection_role }}
+          terraform_version: 0.12.29
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install molecule yamllint ansible-lint google-auth
+
+      - name: Setup gcloud environment
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCLOUD_PROJECT }}
+          service_account_key: ${{ secrets.GCLOUD_KEYFILE_JSON }}
+          export_default_credentials: true
+
+      - name: Run tests
+        run : |
+          ssh-keygen -m PEM -t rsa -b 4096 -f ${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER} -P ''
+          export TF_VAR_ssh_public_key=${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}.pub
+          echo $TF_VAR_ssh_public_key
+          molecule --version
+          ansible --version
+          terraform --version
+          molecule test -s ${{ matrix.collection_role }}
+        working-directory: ansible_collections/klusters/system
+        env:
+          TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
+          GCP_SERVICE_ACCOUNT_FILE: $GOOGLE_APPLICATION_CREDENTIALS

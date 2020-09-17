@@ -1,33 +1,46 @@
 ---
+
 dependency:
   name: galaxy
+
 driver:
-  name: docker
+  name: delegated
+
 lint: |
   yamllint .
   ansible-lint
+
 platforms:
-  - name: instance
-    image: ${MOLECULE_DISTRO:-ubuntu:xenial}
-    privileged: true
-    command: ${MOLECULE_COMMAND:-"sleep infinity"}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}-001
+  instance_name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+  region: europe-west1
+  network: default
+  subnetwork: default
+  machine_type: f1-micro
+  image: ${MOLECULE_DISTRO}
+  image_project: ${MOLECULE_DISTRO_PROJECT}
 
 provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  connection_options:
+    ansible_ssh_user: "github-ci"
+    ansible_ssh_private_key_file: "~/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}"
+    ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+  ansible_args:
+    - --inventory=./gce_instances.gcp.yml
 
 scenario:
-  name: etc_hosts
+  name: filesystems
   test_sequence:
     - lint
-    - destroy
+    # - destroy
     - dependency
     - syntax
     - create
     - prepare
     - converge
-    # - idempotence
+    - idempotence
     - verify
+    - destroy
