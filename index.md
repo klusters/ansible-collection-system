@@ -1,37 +1,66 @@
-## Welcome to GitHub Pages
+# Ansible Collection - klusters.system
+[Inspired by ericsysmin.system](https://galaxy.ansible.com/ericsysmin/system)
 
-You can use the [editor on GitHub](https://github.com/klusters/ansible-collection-system/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Ansible collection that holds roles, that can be used to configure common system services. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Roles
 
-### Markdown
+| Role      | Build Status                                                                                                                                                                                                                                                        | Documentation                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+|  etc_hosts   | ![klusters.system.etc_hosts](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.etc_hosts/badge.svg)          | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/etc_hosts)    |
+|  filesystems   | ![klusters.system.filesystems](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.filesystems/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/filesystems)    |
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Usage
 
-```markdown
-Syntax highlighted code block
+You can find specific to each role within the "Documentation" link for each role. However, most should be in this format:
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Install this ansible collection :
+```bash
+ansible-galaxy collection install klusters.system
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Write a playbook file *playbook_name.yml* :
 
-### Jekyll Themes
+```yaml
+---
+- hosts: localhost
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/klusters/ansible-collection-system/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+  tasks:
+    - include_role:
+        name: klusters.system.<role_name>
+```
 
-### Support or Contact
+Run *playbook_name.yml* :
+```bash
+ansible-playbook playbook_name.yml
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Testing
+
+Testing is done through GitHub Actions, and can be tested locally as well.
+
+To be able to test locally:
+- install docker 
+- install [nektos/act](https://github.com/nektos/act)
+- download the huge docker image (18GB) : [nektos/act-environments-ubuntu:18.04](https://hub.docker.com/r/nektos/act-environments-ubuntu/tags)
+
+For example, on MacOS:
+```bash
+brew cask install docker
+
+brew install act
+
+open /Applications/Docker.app
+docker pull nektos/act-environments-ubuntu:18.04
+```
+
+Each workflow pertains to a single role, and can be launched locally using the following command:
+
+```bash
+export GCLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
+export GCLOUD_KEYFILE_JSON=$(cat <YOUR_GCP_SERVICE_ACCOUNT_CREDENTIALS_FILE>)
+
+act -s GCLOUD_PROJECT -s GCLOUD_KEYFILE_JSON \
+-W .github/workflows/<WORKFLOW_FILE_TO_RUN> \
+-P ubuntu-latest=nektos/act-environments-ubuntu:18.04
+```
