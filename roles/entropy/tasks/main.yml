@@ -16,7 +16,7 @@
     group: root
     mode: 0644
   notify:
-    - daemon reload
+    - restart rngd
 
 - name: Ensure that the rngd service is enabled and started at boot time
   become: yes
@@ -24,3 +24,4 @@
     name: rngd
     enabled: yes
     state: started
+    daemon_reload: yes
