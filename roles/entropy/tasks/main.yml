@@ -1,6 +1,5 @@
 ---
 
-
 - name: Install rng-tools
   become: yes
   package:
@@ -17,11 +16,3 @@
     mode: 0644
   notify:
     - restart rngd
-
-- name: Ensure that the rngd service is enabled and started at boot time
-  become: yes
-  service:
-    name: rngd
-    enabled: yes
-    state: started
-    daemon_reload: yes
