@@ -55,31 +55,6 @@ platforms:
     disk_size_gb: 1
     disk_type: pd-standard
 
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
 provisioner:
   name: ansible
   playbooks:
