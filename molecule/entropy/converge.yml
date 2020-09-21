@@ -6,7 +6,7 @@
     package:
       name: rng-tools
       state: present
-    
+
   - name: list rngd devices
     shell: rngd --list
     register: rngd
