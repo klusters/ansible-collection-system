@@ -4,7 +4,7 @@
 - name: Install rng-tools
   package:
     name: rng-tools
-    state: installed
+    state: present
 
 - name: Configure rngd to use random number source device
   template:
