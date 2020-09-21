@@ -1,6 +1,13 @@
 ---
 - name: Converge
   hosts: all
+  pre_tasks:
+  - package:
+      name: rng-tools
+      state: present
+  - shell: rngd --list
+    register: rngd
 
+  - debug: var=rngd.stdout_lines
   roles:
     - role: klusters.system.entropy
