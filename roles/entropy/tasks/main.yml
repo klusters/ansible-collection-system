@@ -2,21 +2,13 @@
 
 
 - name: Install rng-tools
+  become: yes
   package:
     name: rng-tools
     state: present
 
 - name: Configure rngd to use random number source device
-  template:
-    src: rngd.sysconfig.j2
-    dest: /etc/sysconfig/rngd
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - restart rngd
-
-- name: Configure rngd to use random number source device
+  become: yes
   template:
     src: rngd.service.j2
     dest: /etc/systemd/system/rngd.service
@@ -27,6 +19,7 @@
     - daemon reload
 
 - name: Ensure that the rngd service is enabled and started at boot time
+  become: yes
   service:
     name: rngd
     enabled: yes

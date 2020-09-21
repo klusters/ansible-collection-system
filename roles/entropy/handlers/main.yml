@@ -1,10 +1,12 @@
 ---
 - name: restart rngd
+  become: yes
   service:
     name: rngd
     state: restarted
 
 - name: daemon reload
+  become: yes
   systemd:
     name: rngd
     state: restarted
