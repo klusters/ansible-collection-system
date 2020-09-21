@@ -5,7 +5,6 @@ driver:
   name: docker
 lint: |
   yamllint .
-  ansible-lint
 platforms:
   - name: instance
     image: ${MOLECULE_DISTRO:-ubuntu:xenial}
