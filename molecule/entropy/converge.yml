@@ -2,10 +2,13 @@
 - name: Converge
   hosts: all
   pre_tasks:
-  - package:
+  - name: install rng
+    package:
       name: rng-tools
       state: present
-  - shell: rngd --list
+    
+  - name: list rngd devices
+    shell: rngd --list
     register: rngd
 
   - debug: var=rngd.stdout_lines
