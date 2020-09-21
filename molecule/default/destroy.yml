@@ -2,7 +2,8 @@
 - name: Destroy
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: no
+
   vars:
     terraform_dir: "{{ playbook_dir }}/../terraform"
 
