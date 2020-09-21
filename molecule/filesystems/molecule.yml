@@ -84,23 +84,12 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
   connection_options:
     ansible_ssh_user: "github-ci"
     ansible_ssh_private_key_file: "~/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}"
     ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
   ansible_args:
-    - --inventory=./gce_instances.gcp.yml
-
-scenario:
-  name: filesystems
-  test_sequence:
-    - lint
-    # - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - converge
-    - idempotence
-    - verify
-    - destroy
+    - --inventory=../default/gce_instances.gcp.yml
