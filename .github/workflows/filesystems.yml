@@ -10,13 +10,6 @@ on:
       - '.github/workflows/filesystems.yml'
       - 'molecule/common/**'
 
-  pull_request:
-    paths:
-      - 'roles/filesystems/**'
-      - 'molecule/filesystems/**'
-      - '.github/workflows/filesystems.yml'
-      - 'molecule/common/**'
-
 jobs:
   build:
     runs-on: ubuntu-latest
