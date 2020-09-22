@@ -1,0 +1,18 @@
+---
+
+- name: Install rng-tools
+  become: yes
+  package:
+    name: rng-tools
+    state: present
+
+- name: Configure rngd to use random number source device
+  become: yes
+  template:
+    src: rngd.service.j2
+    dest: /etc/systemd/system/rngd.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart rngd

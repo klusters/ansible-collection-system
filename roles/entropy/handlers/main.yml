@@ -1,0 +1,9 @@
+---
+
+- name: restart rngd
+  become: yes
+  systemd:
+    name: rngd
+    enabled: yes
+    daemon_reload: yes
+    state: started
