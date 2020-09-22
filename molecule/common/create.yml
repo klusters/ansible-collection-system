@@ -29,8 +29,8 @@
 
   - name: Terraform apply
     terraform:
-      binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
+      binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' }}"
       force_init: yes
       project_path: '{{ terraform_dir }}'
-      workspace: "{{ lookup('env','MOLECULE_DISTRO') + '-' + lookup('env','GITHUB_RUN_NUMBER') |default('default') }}"
+      workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') }}"
       state: present
