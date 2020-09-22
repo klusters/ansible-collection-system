@@ -58,6 +58,13 @@ docker pull nektos/act-environments-ubuntu:18.04
 Each workflow pertains to a single role, and can be launched locally using the following command:
 
 ```bash
+act -W .github/workflows/<WORKFLOW_FILE_TO_RUN> \
+-P ubuntu-latest=nektos/act-environments-ubuntu:18.04
+```
+
+For Google Cloud based workflows : 
+
+```bash
 export GCLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
 export GCLOUD_KEYFILE_JSON=$(cat <YOUR_GCP_SERVICE_ACCOUNT_CREDENTIALS_FILE>)
 
