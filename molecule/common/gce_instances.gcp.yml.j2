@@ -1,11 +1,12 @@
 plugin: gcp_compute
 projects:
-  - github-ci-290307
-filters: []
+  - {{ lookup('env','GCLOUD_PROJECT') }}
+filters:
+  - labels.molecule_scenario = {{ lookup('env','MOLECULE_SCENARIO') }}
 auth_kind: serviceaccount
 scopes:
- - 'https://www.googleapis.com/auth/cloud-platform'
- - 'https://www.googleapis.com/auth/compute.readonly'
+  - 'https://www.googleapis.com/auth/cloud-platform'
+  - 'https://www.googleapis.com/auth/compute.readonly'
 groups:
   centos_7: "'centos-7' in disks[0].licenses[0]"
   centos_8: "'centos-8' in disks[0].licenses[0]"

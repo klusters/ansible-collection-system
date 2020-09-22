@@ -19,6 +19,9 @@ platforms:
   machine_type: f1-micro
   image: ${MOLECULE_DISTRO}
   image_project: ${MOLECULE_DISTRO_PROJECT}
+  labels:
+    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
+    molecule_distro: ${MOLECULE_DISTRO}
 
 provisioner:
   name: ansible

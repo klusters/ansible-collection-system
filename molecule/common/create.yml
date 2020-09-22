@@ -8,6 +8,12 @@
     terraform_dir: "{{ playbook_dir }}/../terraform"
 
   pre_tasks:
+  - name: Generate GCP dynamic inventory file
+    template:
+      src: gce_instances.gcp.yml.j2
+      dest: gce_instances.gcp.yml
+      mode: 0644
+
   - name: Get Terraform scripts
     git:
       repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
