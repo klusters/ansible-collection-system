@@ -1,6 +1,6 @@
 plugin: gcp_compute
 projects:
-  - feisty-catcher-261412
+  - github-ci-290307
 filters: []
 auth_kind: serviceaccount
 scopes:
