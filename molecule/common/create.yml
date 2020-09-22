@@ -1,5 +1,5 @@
 ---
-- name: Destroy
+- name: Create
   hosts: localhost
   connection: local
   gather_facts: no
@@ -12,13 +12,19 @@
     git:
       repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
       dest: '{{ terraform_dir }}'
-      version: master
+      version: main
 
   tasks:
-  - name: Terraform destroy
+  - name: Generate Terraform vars
+    copy:
+      dest: '{{ terraform_dir }}/terraform.tfvars.json'
+      content: "{{ molecule_yml.platforms[0] }}"
+      mode: '0644'
+
+  - name: Terraform apply
     terraform:
       binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
       force_init: yes
       project_path: '{{ terraform_dir }}'
       workspace: "{{ lookup('env','MOLECULE_DISTRO') + '-' + lookup('env','GITHUB_RUN_NUMBER') |default('default') }}"
-      state: absent
+      state: present
