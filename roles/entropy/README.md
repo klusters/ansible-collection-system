@@ -18,6 +18,7 @@ This role is tested against :
 | `rngd_device`       | No       | `DRNG`                                                                | Name of the device to use (rngd -v)         |
 | `rngd_options`       | No       | `-n 1`                                                                | rngd options         |
 
+
 ## Examples
 
 ```yaml
