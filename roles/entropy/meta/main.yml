@@ -1,0 +1,20 @@
+---
+
+galaxy_info:
+  author: Klusters
+  description: Configure RNGD to fix entropy issues on linux systems
+  company: ''
+  license: GPL-2.0-or-later
+  min_ansible_version: 2.9
+  platforms:
+  - name: EL
+    versions:
+    - 8
+    - 7
+  - name: Ubuntu
+    versions:
+    - xenial
+    - bionic
+  galaxy_tags:
+  - system
+  - rng

@@ -1,0 +1,4 @@
+---
+
+rngd_device: 'DRNG'
+rngd_options: '-n 1'

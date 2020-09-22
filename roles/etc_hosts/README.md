@@ -7,7 +7,7 @@ This role has been created because we didn't find any scalable role. Each host w
 ## Requirements
 
 This role is tested against :
-  - CentOS 8
+  - CentOS 7 & 8
   - Ubuntu 18.04 & 20.04
 
 ## Role Variables
