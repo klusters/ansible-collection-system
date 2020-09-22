@@ -24,12 +24,12 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-    create: ../default/create.yml
-    destroy: ../default/destroy.yml
-    prepare: ../default/prepare.yml
+    create: ../common/create.yml
+    destroy: ../common/destroy.yml
+    prepare: ../common/prepare.yml
   connection_options:
     ansible_ssh_user: "github-ci"
     ansible_ssh_private_key_file: "~/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}"
     ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
   ansible_args:
-    - --inventory=../default/gce_instances.gcp.yml
+    - --inventory=../common/gce_instances.gcp.yml
