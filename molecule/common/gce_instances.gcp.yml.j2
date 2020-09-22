@@ -2,7 +2,7 @@ plugin: gcp_compute
 projects:
   - {{ lookup('env','GCLOUD_PROJECT') }}
 filters:
-  - labels.molecule_scenario = {{ lookup('env','MOLECULE_SCENARIO') }}
+  - labels.molecule_scenario = {{ lookup('env','MOLECULE_SCENARIO_NAME') }}
 auth_kind: serviceaccount
 scopes:
   - 'https://www.googleapis.com/auth/cloud-platform'
