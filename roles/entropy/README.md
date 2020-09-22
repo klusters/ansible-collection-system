@@ -15,7 +15,7 @@ This role is tested against :
 
 | Variable                 | Required | Default                                                                  | Comments                                        |
 | ------------------------ | -------- | ------------------------------------------------------------------------ | ----------------------------------------------- |
-| `rngd_device`       | No       | `/dev/urandom`                                                                | Name of the device to use (rngd --list)         |
+| `rngd_device`       | No       | `/dev/urandom`                                                                | Name of the device to use (rngd -v)         |
 
 ## Examples
 

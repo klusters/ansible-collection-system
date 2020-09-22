@@ -7,7 +7,7 @@ lint: |
   yamllint .
 platforms:
   - name: instance
-    image: ${MOLECULE_DISTRO:-ubuntu:xenial}
+    image: ${MOLECULE_DISTRO:-ubuntu:20.04}
     privileged: true
     command: ${MOLECULE_COMMAND:-"sleep infinity"}
     volumes:

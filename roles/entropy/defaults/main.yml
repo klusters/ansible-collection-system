@@ -1,3 +1,4 @@
 ---
 
-rngd_device: /dev/urandom
+rngd_device: 'DRNG'
+rngd_options: '-n 1'
