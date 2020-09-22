@@ -9,6 +9,7 @@ Ansible collection that holds roles, that can be used to configure common system
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 |  etc_hosts   | ![klusters.system.etc_hosts](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.etc_hosts/badge.svg)          | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/etc_hosts)    |
 |  filesystems   | ![klusters.system.filesystems](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.filesystems/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/filesystems)    |
+|  entropy   | ![klusters.system.entropy](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.entropy/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/entropy)    |
 
 ## Usage
 
@@ -55,6 +56,13 @@ docker pull nektos/act-environments-ubuntu:18.04
 ```
 
 Each workflow pertains to a single role, and can be launched locally using the following command:
+
+```bash
+act -W .github/workflows/<WORKFLOW_FILE_TO_RUN> \
+-P ubuntu-latest=nektos/act-environments-ubuntu:18.04
+```
+
+For Google Cloud based workflows : 
 
 ```bash
 export GCLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
