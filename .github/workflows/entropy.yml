@@ -1,11 +1,14 @@
+---
+
 name: "klusters.system.entropy"
+
 on:
-  push:
-    paths:
-      - 'roles/entropy/**'
-      - 'molecule/entropy/**'
-      - '.github/workflows/entropy.yml'
-      - 'molecule/common/**'
+  # push:
+  #   paths:
+  #     - 'roles/entropy/**'
+  #     - 'molecule/entropy/**'
+  #     - '.github/workflows/entropy.yml'
+  #     - 'molecule/common/**'
   pull_request:
     paths:
       - 'roles/entropy/**'
