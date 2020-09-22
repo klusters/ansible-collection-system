@@ -1,12 +1,14 @@
+---
+
 name: "klusters.system.etc_hosts"
 
 on:
-  push:
-    paths:
-      - 'roles/etc_hosts/**'
-      - 'molecule/etc_hosts/**'
-      - '.github/workflows/etc_hosts.yml'
-      - 'molecule/common/**'
+  # push:
+  #   paths:
+  #     - 'roles/etc_hosts/**'
+  #     - 'molecule/etc_hosts/**'
+  #     - '.github/workflows/etc_hosts.yml'
+  #     - 'molecule/common/**'
 
   pull_request:
     paths:
