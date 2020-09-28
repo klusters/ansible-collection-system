@@ -12,7 +12,7 @@
     git:
       repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
       dest: '{{ terraform_dir }}'
-      version: main
+      version: 'feat/loop'
 
   tasks:
   - name: Terraform destroy
