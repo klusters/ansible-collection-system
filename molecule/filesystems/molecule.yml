@@ -22,6 +22,7 @@ platforms:
   labels:
     molecule_scenario: ${MOLECULE_SCENARIO_NAME}
     molecule_distro: centos-7
+
   additional_disks:
   - auto_delete: yes
     boot: no
@@ -69,6 +70,7 @@ platforms:
   labels:
     molecule_scenario: ${MOLECULE_SCENARIO_NAME}
     molecule_distro: centos-8
+
   additional_disks:
   - auto_delete: yes
     boot: no
@@ -116,6 +118,7 @@ platforms:
   labels:
     molecule_scenario: ${MOLECULE_SCENARIO_NAME}
     molecule_distro: ubuntu-1804-lts
+
   additional_disks:
   - auto_delete: yes
     boot: no

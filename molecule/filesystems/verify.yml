@@ -3,7 +3,10 @@
 
 - name: Verify
   hosts: all
+  strategy: free
+
   vars_files: ['../../roles/filesystems/defaults/main.yml']
+
   tasks:
   - name: Assert device is mounted
     assert:
