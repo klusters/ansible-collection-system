@@ -18,19 +18,19 @@
     git:
       repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
       dest: '{{ terraform_dir }}'
-      version: main
+      version: 'feat/loop'
 
   tasks:
   - name: Generate Terraform vars
-    copy:
+    template:
+      src: 'tfvars.json.j2'
       dest: '{{ terraform_dir }}/terraform.tfvars.json'
-      content: "{{ molecule_yml.platforms[0] }}"
-      mode: '0644'
+      mode: 0644
 
   - name: Terraform apply
     terraform:
       binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' }}"
       force_init: yes
       project_path: '{{ terraform_dir }}'
-      workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') + '-' + lookup('env','MOLECULE_DISTRO') }}"
+      workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}"
       state: present
