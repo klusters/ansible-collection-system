@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
+  strategy: free
 
   roles:
     - role: klusters.system.filesystems
