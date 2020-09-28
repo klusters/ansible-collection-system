@@ -18,7 +18,7 @@ platforms:
   subnetwork: default
   machine_type: f1-micro
   image: centos-7
-  image_project: ${MOLECULE_DISTRO_PROJECT}
+  image_project: centos-cloud
   labels:
     molecule_scenario: ${MOLECULE_SCENARIO_NAME}
     molecule_distro: centos-7
@@ -65,7 +65,7 @@ platforms:
   subnetwork: default
   machine_type: f1-micro
   image: centos-8
-  image_project: ${MOLECULE_DISTRO_PROJECT}
+  image_project: centos-cloud
   labels:
     molecule_scenario: ${MOLECULE_SCENARIO_NAME}
     molecule_distro: centos-8
