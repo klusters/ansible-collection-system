@@ -22,10 +22,15 @@
 
   tasks:
   - name: Generate Terraform vars
-    copy:
+    template:
+      src: 'tfvars.json.j2'
       dest: '{{ terraform_dir }}/terraform.tfvars.json'
-      content: "{{ molecule_yml.platforms[0] }}"
       mode: '0644'
+  # - name: Generate Terraform vars
+  #   copy:
+  #     dest: '{{ terraform_dir }}/terraform.tfvars.json'
+  #     content: "{{ molecule_yml.platforms }}"
+  #     mode: '0644'
 
   - name: Terraform apply
     terraform:

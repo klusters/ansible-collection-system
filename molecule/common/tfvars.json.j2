@@ -1,0 +1,7 @@
+{
+    "instances": {
+{% for instance in molecule_yml.platforms %}
+"{{ instance.name }}" : {{ instance | to_json }}
+{% endfor %}
+    }
+}
