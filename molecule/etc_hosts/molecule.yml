@@ -11,17 +11,57 @@ lint: |
   ansible-lint
 
 platforms:
-- name: ${MOLECULE_DISTRO}-${GITHUB_RUN_NUMBER}-001
-  instance_name: ${MOLECULE_DISTRO}-${GITHUB_RUN_NUMBER}
+- name: centos-7-${GITHUB_RUN_NUMBER}-001
+  instance_name: centos-7-${GITHUB_RUN_NUMBER}
   region: europe-west1
   network: default
   subnetwork: default
   machine_type: f1-micro
-  image: ${MOLECULE_DISTRO}
-  image_project: ${MOLECULE_DISTRO_PROJECT}
+  image: centos-7
+  image_project: centos-cloud
   labels:
     molecule_scenario: ${MOLECULE_SCENARIO_NAME}
-    molecule_distro: ${MOLECULE_DISTRO}
+    molecule_distro: centos-7
+  additional_disks: []
+
+- name: centos-8-${GITHUB_RUN_NUMBER}-001
+  instance_name: centos-8-${GITHUB_RUN_NUMBER}
+  region: europe-west1
+  network: default
+  subnetwork: default
+  machine_type: f1-micro
+  image: centos-8
+  image_project: centos-cloud
+  labels:
+    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
+    molecule_distro: centos-8
+  additional_disks: []
+
+- name: ubuntu-1804-lts-${GITHUB_RUN_NUMBER}-001
+  instance_name: ubuntu-1804-lts-${GITHUB_RUN_NUMBER}
+  region: europe-west1
+  network: default
+  subnetwork: default
+  machine_type: f1-micro
+  image: ubuntu-1804-lts
+  image_project: ubuntu-os-cloud
+  labels:
+    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
+    molecule_distro: ubuntu-1804-lts
+  additional_disks: []
+
+- name: ubuntu-2004-lts-${GITHUB_RUN_NUMBER}-001
+  instance_name: ubuntu-2004-lts-${GITHUB_RUN_NUMBER}
+  region: europe-west1
+  network: default
+  subnetwork: default
+  machine_type: f1-micro
+  image: ubuntu-2004-lts
+  image_project: ubuntu-os-cloud
+  labels:
+    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
+    molecule_distro: ubuntu-2004-lts
+  additional_disks: []
 
 provisioner:
   name: ansible

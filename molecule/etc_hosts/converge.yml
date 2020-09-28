@@ -1,11 +1,11 @@
 ---
 - name: Converge
-  hosts: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('-','_') }}"
+  hosts: all
   gather_facts: no
   strategy: free
 
   vars:
-    role_etc_hosts_group: "{{ lookup('env','MOLECULE_DISTRO') | regex_replace('-','_') }}"
+    role_etc_hosts_group: all
 
   roles:
     - role: klusters.system.etc_hosts
