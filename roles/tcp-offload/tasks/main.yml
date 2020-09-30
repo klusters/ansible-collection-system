@@ -1,0 +1,18 @@
+---
+
+- name: Install ethtool
+  become: yes
+  package:
+    name: ethtool
+    state: present
+
+- name: Configure rngd to use random number source device
+  become: yes
+  template:
+    src: tcp-offload.sh.j2
+    dest: /etc/network/if-post-up.d/tcp-offload.sh
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - restart network

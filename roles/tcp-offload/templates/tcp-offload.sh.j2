@@ -1,0 +1,5 @@
+#!/bin/bash
+
+{% for interface in ansible_interfaces %}
+/sbin/ethtool -K {{ interface }} tso off gso off gro off lro off
+{% endfor %}
