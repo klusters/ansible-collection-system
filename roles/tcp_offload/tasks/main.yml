@@ -14,7 +14,7 @@
     group: root
     mode: 0755
 
-- name: Configure rngd to use random number source device
+- name: Create if-post-up script
   become: yes
   template:
     src: tcp_offload.sh.j2
