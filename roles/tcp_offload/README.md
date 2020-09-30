@@ -1,4 +1,4 @@
-Ansible Role: tcp-offload
+Ansible Role: tcp_offload
 ==================
 
 Configure tcp offload
@@ -16,5 +16,5 @@ This role is tested against :
   strategy: free
 
   roles:
-    - role: klusters.system.tcp-offload
+    - role: klusters.system.tcp_offload
 ```

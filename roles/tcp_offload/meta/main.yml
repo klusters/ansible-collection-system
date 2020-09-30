@@ -2,7 +2,7 @@
 
 galaxy_info:
   author: Klusters
-  description: Configure RNGD to fix entropy issues on linux systems
+  description: Configure tcp offload to fix network issues on linux systems
   company: ''
   license: GPL-2.0-or-later
   min_ansible_version: 2.9

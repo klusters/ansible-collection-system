@@ -1,13 +1,13 @@
 ---
 
-name: "klusters.system.tcp-offload"
+name: "klusters.system.tcp_offload"
 
 on:
   push:
     paths:
-      - 'roles/tcp-offload/**'
-      - 'molecule/tcp-offload/**'
-      - '.github/workflows/tcp-offload.yml'
+      - 'roles/tcp_offload/**'
+      - 'molecule/tcp_offload/**'
+      - '.github/workflows/tcp_offload.yml'
       - 'molecule/common/**'
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
           - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
           - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
         collection_role:
-          - tcp-offload
+          - tcp_offload
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
