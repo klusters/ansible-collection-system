@@ -2,7 +2,6 @@
 
 - name: restart network
   become: yes
-  systemd:
+  service:
     name: network
     state: restarted
-    daemon_reload: yes
