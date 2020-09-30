@@ -6,6 +6,14 @@
     name: ethtool
     state: present
 
+- name: Create if-post-up directory
+  file:
+    state: directory
+    path: /etc/network/if-post-up.d
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Configure rngd to use random number source device
   become: yes
   template:
