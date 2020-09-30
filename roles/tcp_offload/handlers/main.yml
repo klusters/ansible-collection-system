@@ -2,6 +2,7 @@
 
 - name: restart network
   become: yes
-  service:
+  systemd:
     name: '{{ network_service }}'
     state: restarted
+    daemon_reload: yes
