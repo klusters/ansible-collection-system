@@ -54,7 +54,6 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install Python dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         working-directory: ansible_collections/klusters/system
         run: |
           python -m pip install --upgrade pip
