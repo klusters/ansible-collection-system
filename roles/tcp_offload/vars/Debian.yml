@@ -1,3 +1,7 @@
 ---
 
 network_service: systemd-networkd
+network_packages: 
+- ethtool
+
+network_scripts_dir: /etc/network/if-post-up.d
