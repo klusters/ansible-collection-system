@@ -1,0 +1,42 @@
+- name: Verify
+  hosts: all
+  strategy: free
+
+  pre_tasks:
+  - name: Install jmespath
+    pip:
+      name:
+      - jmespath
+    delegate_to: 127.0.0.1
+  - name: Set lines_to_check
+    set_fact:
+      lines_to_check:
+      - 'tcp-segmentation-offload: off'
+      - 'generic-segmentation-offload: off'
+      - 'generic-receive-offload: off'
+      - 'large-receive-offload: off'
+
+  tasks:
+  - name: get offload config
+    command: ethtool -k '{{ item }}'
+    loop: '{{ ansible_interfaces }}'
+    register: offload
+    changed_when: no
+
+  # - debug:
+  #     msg: "{{ offload.results | json_query(query) }}"
+  #   loop: '{{ ansible_interfaces|product(lines_to_check)|list }}'
+  #   vars:
+  #     query: "[?item=='{{ item.0 }}'].stdout_lines"
+
+  - name: check offload config
+    assert:
+      that: "offload.results | json_query(query) is search('{{ item.1 }}')"
+    loop: '{{ ansible_interfaces|product(lines_to_check)|list }}'
+    vars:
+      query: "[?item=='{{ item.0 }}'].stdout_lines"
+  # - assert:
+  #     that: "'{{ item.1 }}' in offload.results | json_query(query)"
+  #   loop: '{{ ansible_interfaces|product(lines_to_check)|list }}'
+  #   vars:
+  #     query: "[?item=='{{ item.0 }}'].stdout"

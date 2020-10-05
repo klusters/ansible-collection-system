@@ -1,0 +1,51 @@
+---
+
+name: "klusters.system.tcp_offload"
+
+on:
+  push:
+    paths:
+      - 'roles/tcp_offload/**'
+      - 'molecule/tcp_offload/**'
+      - '.github/workflows/tcp_offload.yml'
+      - 'molecule/common/**'
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
+      MOLECULE_DISTRO: ${{ matrix.molecule_distro.distro }}
+      MOLECULE_COMMAND: ${{ matrix.molecule_distro.command }}
+    strategy:
+      fail-fast: true
+      matrix:
+        molecule_distro:
+          - { "distro":"centos-7", "command":"/usr/sbin/init" }
+          - { "distro":"centos-8", "command":"/usr/sbin/init" }
+          - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
+          - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
+        collection_role:
+          - tcp_offload
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/klusters/system
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Python dependencies
+        working-directory: ansible_collections/klusters/system
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r molecule/${{ matrix.collection_role }}/requirements.txt
+
+      - name: Run tests
+        working-directory: ansible_collections/klusters/system
+        run: |
+          molecule test -s ${{ matrix.collection_role }}
