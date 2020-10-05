@@ -17,10 +17,11 @@
       - 'large-receive-offload: off'
 
   tasks:
-  - name: check offload config
+  - name: get offload config
     command: ethtool -k '{{ item }}'
     loop: '{{ ansible_interfaces }}'
     register: offload
+    changed_when: no
 
   # - debug:
   #     msg: "{{ offload.results | json_query(query) }}"
@@ -28,7 +29,8 @@
   #   vars:
   #     query: "[?item=='{{ item.0 }}'].stdout_lines"
 
-  - assert:
+  - name: check offload config
+    assert:
       that: "offload.results | json_query(query) is search('{{ item.1 }}')"
     loop: '{{ ansible_interfaces|product(lines_to_check)|list }}'
     vars:
