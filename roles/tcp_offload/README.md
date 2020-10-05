@@ -1,7 +1,7 @@
 Ansible Role: tcp_offload
 ==================
 
-Configure tcp offload
+Configure tcp offload via NetworkManager network scripts
 
 ## Requirements
 
