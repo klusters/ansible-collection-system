@@ -1,7 +1,9 @@
 ---
 
-network_service: systemd-networkd
+network_service: NetworkManager
+
 network_packages: 
 - ethtool
+- network-manager
 
-network_scripts_dir: /etc/network/if-post-up.d
+network_scripts_dir: /etc/NetworkManager/dispatcher.d

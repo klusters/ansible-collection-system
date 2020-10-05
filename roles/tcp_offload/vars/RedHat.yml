@@ -1,6 +1,7 @@
 ---
 
 network_service: NetworkManager
+
 network_packages: 
 - ethtool
 - NetworkManager
