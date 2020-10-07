@@ -61,5 +61,6 @@ jobs:
 
       - name: Run tests
         working-directory: ansible_collections/klusters/system
+        run: |
           terraform --version
           molecule test -s ${{ matrix.collection_role }}
