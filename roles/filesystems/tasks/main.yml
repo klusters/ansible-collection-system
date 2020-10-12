@@ -1,5 +1,10 @@
 ---
 
+- name: Gather facts
+  when: ansible_devices is not defined
+  setup:
+    gather_subset: '!all,!min,hardware'
+
 - name: Install LVM2 packages
   become: true
   package:
