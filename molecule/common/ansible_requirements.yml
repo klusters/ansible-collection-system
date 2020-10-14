@@ -1,0 +1,6 @@
+---
+
+roles:
+  - src: git+https://github.com/klusters/ansible-role-cloud-infra.git
+    name: cloud-infra
+    version: 'feat/generic'
