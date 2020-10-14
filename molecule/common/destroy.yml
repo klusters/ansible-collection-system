@@ -9,3 +9,4 @@
   - role: cloud-infra
     vars:
       state: absent
+      terraform_project_repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
