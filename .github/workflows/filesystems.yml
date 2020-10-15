@@ -50,6 +50,7 @@ jobs:
           project_id: ${{ secrets.GCLOUD_PROJECT }}
           service_account_key: ${{ secrets.GCLOUD_KEYFILE_JSON }}
           export_default_credentials: true
+          version: '313.0.0'
 
       - name: Set env
         run: |
