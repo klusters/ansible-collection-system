@@ -109,8 +109,8 @@ platforms:
     disk_size_gb: 1
     disk_type: pd-standard
 
-- name: ubuntu-1804-lts-${GITHUB_RUN_NUMBER}-001
-  instance_name: ubuntu-1804-lts-${GITHUB_RUN_NUMBER}
+- name: ${MOLECULE_SCENARIO_NAME}-ubuntu-1804-lts-001
+  instance_name: ${MOLECULE_SCENARIO_NAME}-ubuntu-1804-lts
   region: europe-west1
   network: default
   subnetwork: default
@@ -157,8 +157,8 @@ platforms:
     disk_size_gb: 1
     disk_type: pd-standard
 
-- name: ubuntu-2004-lts-${GITHUB_RUN_NUMBER}-001
-  instance_name: ubuntu-2004-lts-${GITHUB_RUN_NUMBER}
+- name: ${MOLECULE_SCENARIO_NAME}-ubuntu-2004-lts-001
+  instance_name: ${MOLECULE_SCENARIO_NAME}-ubuntu-2004-lts
   region: europe-west1
   network: default
   subnetwork: default
@@ -213,8 +213,13 @@ provisioner:
     destroy: ../common/destroy.yml
     prepare: ../common/prepare.yml
   connection_options:
-    ansible_ssh_user: "github-ci"
-    ansible_ssh_private_key_file: "~/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}"
-    ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+    ansible_ssh_common_args: "-F {{ ssh_files_path }}/{{ ssh_config_name }}"
   ansible_args:
     - --inventory=../common/gce_instances.gcp.yml
+  inventory:
+    group_vars:
+      all:
+        ssh_files_path: "$HOME/.ssh"
+        ssh_privkey_name: "ansible_sa"
+        ssh_publkey_name: "ansible_sa.pub"
+        ssh_config_name: "ansible_sa.config"
