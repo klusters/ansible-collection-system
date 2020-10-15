@@ -213,7 +213,7 @@ provisioner:
     destroy: ../common/destroy.yml
     prepare: ../common/prepare.yml
   connection_options:
-    ansible_ssh_common_args: "-F {{ ssh_files_path }}/{{ ssh_config_name }}"
+    ansible_ssh_private_key_file: "{{ ssh_files_path }}/{{ ssh_privkey_name }}"
   ansible_args:
     - --inventory=../common/gce_instances.gcp.yml
   inventory:
