@@ -2,6 +2,8 @@
 
 dependency:
   name: galaxy
+  options:
+    role-file: molecule/common/ansible_requirements.yml
 
 driver:
   name: delegated
