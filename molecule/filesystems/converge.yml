@@ -1,8 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  strategy: free
   gather_facts: no
+  strategy: free
 
   roles:
     - role: klusters.system.filesystems

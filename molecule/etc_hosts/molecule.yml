@@ -71,8 +71,13 @@ provisioner:
     destroy: ../common/destroy.yml
     prepare: ../common/prepare.yml
   connection_options:
-    ansible_ssh_user: "github-ci"
-    ansible_ssh_private_key_file: "~/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}"
-    ansible_ssh_common_args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+    ansible_ssh_common_args: "-F {{ ssh_files_path }}/{{ ssh_config_name }}"
   ansible_args:
-    - --inventory=../common/gce_instances.gcp.yml
+    - --inventory=../common/molecule_gce_instances.gcp.yml
+  inventory:
+    group_vars:
+      all:
+        ssh_files_path: "$HOME/.ssh"
+        ssh_privkey_name: "ansible_sa"
+        ssh_publkey_name: "ansible_sa.pub"
+        ssh_config_name: "ansible_sa.config"
