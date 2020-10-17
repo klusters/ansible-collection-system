@@ -13,4 +13,5 @@
       template_tfvars: 'molecule_tfvars.json.j2'
       template_ssh_config: 'molecule_ssh_config.j2'
       terraform_project_repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
+      terraform_project_version: 'ref/gcp'
       inventory_dest: '{{ playbook_dir }}'
