@@ -1,24 +1,12 @@
 ---
-- name: Destroy
+
+- name: Destroy infra
   hosts: localhost
   connection: local
   gather_facts: no
 
-  vars:
-    terraform_dir: "{{ playbook_dir }}/../terraform"
-
-  pre_tasks:
-  - name: Get Terraform scripts
-    git:
-      repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
-      dest: '{{ terraform_dir }}'
-      version: 'feat/loop'
-
-  tasks:
-  - name: Terraform destroy
-    terraform:
-      binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' }}"
-      force_init: yes
-      project_path: '{{ terraform_dir }}'
-      workspace: "{{ lookup('env','MOLECULE_SCENARIO_NAME') }}"
+  roles:
+  - role: cloud-infra
+    vars:
       state: absent
+      terraform_project_repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
