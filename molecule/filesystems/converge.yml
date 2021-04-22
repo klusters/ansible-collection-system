@@ -24,7 +24,7 @@
         mount_path: /var/log
 
       - dev_name: /dev/loop3
-        mount_path: /tmp
+        mount_path: /usr/hdp
 
       - dev_name: /dev/loop4
         mount_path: /data/01
