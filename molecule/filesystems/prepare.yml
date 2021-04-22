@@ -1,0 +1,36 @@
+---
+
+- name: prepare
+  hosts: all
+
+  vars:
+    bd_loop: "{{ range(0, 5, 1)|list }}"
+
+  tasks:
+
+    - name: remove existing loop devices
+      file:
+        name: /dev/loop{{ item }}
+        state: absent
+      loop: "{{ bd_loop }}"
+
+    - name: create disk.img
+      command: dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100
+      args:
+        creates: "/disk{{ item }}.img"
+      loop: "{{ bd_loop }}"
+
+    - name: 'create /dev/loop{{ item }}'
+      command: mknod /dev/loop{{ item }} b 7 {{ 8 + item }}
+      args:
+        creates: '/dev/loop{{ item }}'
+      notify:
+        - link disk.img
+      loop: "{{ bd_loop }}"
+
+  handlers:
+    - name: link disk.img
+      command: losetup /dev/loop{{ item }} /disk{{ item }}.img
+      loop: "{{ bd_loop }}"
+
+...

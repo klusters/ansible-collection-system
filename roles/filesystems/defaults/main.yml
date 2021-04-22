@@ -72,20 +72,22 @@ dev_mapping:
 
 volume_groups:
   - name: vg.data
-    pvs: /dev/sdb,/dev/sdc,/dev/sdd
+    pvs: /dev/sdc,/dev/sdd
 
 logical_volumes:
   - name: lv.home.user1
     vg: vg.data
-    size: 500M
+    size: 50M
     mount_path: /home/user1
 
   - name: lv.home.user2
     vg: vg.data
-    size: 400M
+    size: 40M
     mount_path: /home/user2
 
   - name: lv.opt
     vg: vg.data
-    size: 500M
+    size: 50M
     mount_path: /opt
+
+...

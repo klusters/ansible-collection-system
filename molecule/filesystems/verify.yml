@@ -1,11 +1,32 @@
 ---
-# This is an example playbook to execute Ansible tests.
 
 - name: Verify
   hosts: all
-  strategy: free
 
-  vars_files: ['../../roles/filesystems/defaults/main.yml']
+  vars:
+    default_fs_type: xfs
+    logical_volumes: [] # no /dev/mapper in container, cannot test lv creation
+    volume_groups:
+      - name: vg.data
+        pvs: /dev/loop0,/dev/loop1
+
+    dev_mapping:
+
+    - dev_name: /dev/loop0
+      fs_type: lvm
+
+    - dev_name: /dev/loop1
+      fs_type: lvm
+
+    - dev_name: /dev/loop2
+      mount_path: /var/log
+
+    - dev_name: /dev/loop3
+      mount_path: /tmp
+
+    - dev_name: /dev/loop4
+      mount_path: /data/01
+      mnt_opts: 'defaults,noatime,nofail'
 
   tasks:
   - name: Assert device is mounted
@@ -16,8 +37,11 @@
     - item.fs_type | default(default_fs_type) != 'lvm'
     - item.dev_name | basename in ansible_devices
 
+# Cannot test LV on docker : no /dev/mapper...
   - name: Assert LV is mounted
     assert:
       that: "'/dev/mapper/{{ item.vg }}-{{ item.name }}' in ansible_mounts | json_query('[*].device')"
     loop: "{{ logical_volumes }}"
     when: logical_volumes | length > 0
+
+...
