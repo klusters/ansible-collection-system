@@ -5,6 +5,7 @@
 
   roles:
   - role: klusters.system.filesystems
+
     vars:
       default_fs_type: xfs
       logical_volumes: [] # no /dev/mapper in container, cannot test lv creation
