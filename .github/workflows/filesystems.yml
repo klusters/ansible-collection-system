@@ -4,11 +4,11 @@ name: "klusters.system.filesystems"
 
 on:
   push:
-    # paths:
-    # - 'roles/filesystems/**'
-    # - 'molecule/filesystems/**'
-    # - '.github/workflows/filesystems.yml'
-    # - 'molecule/common/**'
+    paths:
+    - 'roles/filesystems/**'
+    - 'molecule/filesystems/**'
+    - '.github/workflows/filesystems.yml'
+    - 'molecule/common/**'
 
 jobs:
   molecule:
