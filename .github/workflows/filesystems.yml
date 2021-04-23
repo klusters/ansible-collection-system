@@ -11,6 +11,7 @@ on:
     - 'molecule/common/**'
     tags_ignore:
       - '*'
+
 jobs:
   molecule:
     runs-on: ubuntu-latest
@@ -31,31 +32,10 @@ jobs:
         - filesystems
 
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v2
+    - name: Run molecule test
+      uses: klusters/molecule-action@devel
       with:
-        path: ansible_collections/klusters/system
-
-    - name: Set up Python 3
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
-
-    - name: Cache python packages
-      uses: actions/cache@v2
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('**/python_requirements.txt') }}
-
-    - name: Install python packages
-      working-directory: ansible_collections/klusters/system
-      run: |
-        (test -f molecule/${{ matrix.collection_role }}/python_requirements.txt && pip install --upgrade --upgrade-strategy eager -r molecule/${{ matrix.collection_role }}/python_requirements.txt ) ||
-        (test -f molecule/common/python_requirements.txt && pip install --upgrade --upgrade-strategy eager -r molecule/common/python_requirements.txt )
-
-    - name: Run tests
-      working-directory: ansible_collections/klusters/system
-      run: |
-        molecule test -s ${{ matrix.collection_role }}
+        checkout_path: ansible_collections/klusters/system
+        scenario: ${{ matrix.collection_role }}
 
 ...
