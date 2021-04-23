@@ -6,11 +6,11 @@
     gather_subset: '!all,!min,default_ipv4'
   delegate_to: "{{ item }}"
   delegate_facts: yes
-  loop: "{{ groups[role_etc_hosts_group] }}"
+  loop: "{{ groups[etc_hosts_group] }}"
 
-- name: Add mappings to /etc/hosts
+- name: "Add mappings to {{ etc_hosts_file }}"
   become: yes
   blockinfile:
-    path: /etc/hosts
+    path: "{{ etc_hosts_file }}"
     content: "{{ lookup('template', 'templates/etc_hosts.j2') }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
