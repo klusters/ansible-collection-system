@@ -1,3 +1,7 @@
 ---
 
-role_etc_hosts_group: all
+etc_hosts_group: all
+
+etc_hosts_file: /etc/hosts
+
+...

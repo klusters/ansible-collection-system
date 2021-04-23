@@ -5,7 +5,8 @@
   strategy: free
 
   vars:
-    role_etc_hosts_group: all
+    etc_hosts_group: all
+    etc_hosts_file: /etc/hosts2 # Cannot modify /etc/hosts in docker
 
   roles:
     - role: klusters.system.etc_hosts
