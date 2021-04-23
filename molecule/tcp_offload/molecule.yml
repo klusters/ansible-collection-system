@@ -1,19 +1,33 @@
 ---
+
 dependency:
   name: galaxy
+
+lint: |
+  set -e
+  yamllint roles/filesystems
+  ansible-lint roles/filesystems
+
 driver:
   name: docker
-lint: |
-  yamllint .
-  ansible-lint
+
 platforms:
-  - name: instance
-    image: ${MOLECULE_DISTRO:-ubuntu:20.04}
-    privileged: true
-    command: ${MOLECULE_COMMAND:-"sleep infinity"}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+  image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+  command: ${MOLECULE_DOCKER_COMMAND:-""}
+  volumes:
+  - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  privileged: yes
+  pre_build_image: yes
+
 provisioner:
   name: ansible
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      bin_ansible_callbacks: yes
+
+verifier:
+  name: ansible
+
+...

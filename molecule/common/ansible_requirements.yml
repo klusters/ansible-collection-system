@@ -1,6 +1,0 @@
----
-
-roles:
-  - src: git+https://github.com/klusters/ansible-role-cloud-infra.git
-    name: cloud-infra
-    version: '1.0.2'

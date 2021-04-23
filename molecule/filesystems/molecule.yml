@@ -2,224 +2,32 @@
 
 dependency:
   name: galaxy
-  options:
-    role-file: molecule/common/ansible_requirements.yml
-
-driver:
-  name: delegated
 
 lint: |
-  yamllint .
-  ansible-lint
+  set -e
+  yamllint roles/filesystems
+  ansible-lint roles/filesystems
+
+driver:
+  name: docker
 
 platforms:
-- name: ${MOLECULE_SCENARIO_NAME}-centos-7-001
-  instance_name: ${MOLECULE_SCENARIO_NAME}-centos-7
-  region: europe-west1
-  network: default
-  subnetwork: default
-  machine_type: f1-micro
-  image: centos-7
-  image_project: centos-cloud
-  labels:
-    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
-    molecule_distro: centos-7
-
-  additional_disks:
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-- name: ${MOLECULE_SCENARIO_NAME}-centos-8-001
-  instance_name: ${MOLECULE_SCENARIO_NAME}-centos-8
-  region: europe-west1
-  network: default
-  subnetwork: default
-  machine_type: f1-micro
-  image: centos-8
-  image_project: centos-cloud
-  labels:
-    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
-    molecule_distro: centos-8
-
-  additional_disks:
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-- name: ${MOLECULE_SCENARIO_NAME}-ubuntu-1804-lts-001
-  instance_name: ${MOLECULE_SCENARIO_NAME}-ubuntu-1804-lts
-  region: europe-west1
-  network: default
-  subnetwork: default
-  machine_type: f1-micro
-  image: ubuntu-1804-lts
-  image_project: ubuntu-os-cloud
-  labels:
-    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
-    molecule_distro: ubuntu-1804-lts
-
-  additional_disks:
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-- name: ${MOLECULE_SCENARIO_NAME}-ubuntu-2004-lts-001
-  instance_name: ${MOLECULE_SCENARIO_NAME}-ubuntu-2004-lts
-  region: europe-west1
-  network: default
-  subnetwork: default
-  machine_type: f1-micro
-  image: ubuntu-2004-lts
-  image_project: ubuntu-os-cloud
-  labels:
-    molecule_scenario: ${MOLECULE_SCENARIO_NAME}
-    molecule_distro: ubuntu-2004-lts
-
-  additional_disks:
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
-
-  - auto_delete: yes
-    boot: no
-    disk_size_gb: 1
-    disk_type: pd-standard
+- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+  image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+  command: ${MOLECULE_DOCKER_COMMAND:-""}
+  volumes:
+  - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  privileged: yes
+  pre_build_image: yes
 
 provisioner:
   name: ansible
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-    create: ../common/create.yml
-    destroy: ../common/destroy.yml
-    prepare: ../common/prepare.yml
-  connection_options:
-    ansible_ssh_common_args: "-F {{ ssh_files_path }}/{{ ssh_config_name }}"
-  ansible_args:
-    - --inventory=../common/molecule_gce_instances.gcp.yml
-  inventory:
-    group_vars:
-      all:
-        ssh_files_path: "$HOME/.ssh"
-        ssh_privkey_name: "ansible_sa"
-        ssh_publkey_name: "ansible_sa.pub"
-        ssh_config_name: "ansible_sa.config"
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      bin_ansible_callbacks: yes
+
+verifier:
+  name: ansible
+
+...

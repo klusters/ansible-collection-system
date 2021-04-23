@@ -1,0 +1,17 @@
+---
+
+- name: prepare
+  hosts: all
+
+  vars:
+    etc_hosts_group: all
+    etc_hosts_file: /etc/hosts2 # Cannot modify /etc/hosts in docker
+
+  tasks:
+  - name: Copy a /etc/hosts file on the remote machine for editing
+    ansible.builtin.copy:
+      src: /etc/hosts
+      dest: /etc/hosts2
+      remote_src: yes
+
+...
