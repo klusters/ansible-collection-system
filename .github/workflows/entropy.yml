@@ -9,6 +9,8 @@ on:
     - 'molecule/entropy/**'
     - '.github/workflows/entropy.yml'
     - 'molecule/common/**'
+    tags_ignore:
+      - '*'
 
 jobs:
   molecule:

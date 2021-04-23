@@ -9,6 +9,8 @@ on:
     - 'molecule/etc_hosts/**'
     - '.github/workflows/etc_hosts.yml'
     - 'molecule/common/**'
+    tags_ignore:
+      - '*'
 
 jobs:
   molecule:
