@@ -1,0 +1,33 @@
+---
+
+- name: set OS dependent variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_os_family }}.yml'
+
+- name: Install '{{ network_packages }}'
+  become: yes
+  package:
+    name: '{{ network_packages }}'
+    state: present
+
+- name: Create network scripts directory
+  become: yes
+  file:
+    state: directory
+    path: '{{ network_scripts_dir }}'
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Create network script
+  become: yes
+  template:
+    src: tcp_offload.sh.j2
+    dest: '{{ network_scripts_dir }}/tcp_offload.sh'
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - restart network

@@ -1,3 +1,5 @@
+---
+
 name: "klusters.system.etc_hosts"
 
 on:
@@ -7,14 +9,8 @@ on:
       - 'molecule/etc_hosts/**'
       - '.github/workflows/etc_hosts.yml'
       - 'molecule/common/**'
-
-  pull_request:
-    paths:
-      - 'roles/etc_hosts/**'
-      - 'molecule/etc_hosts/**'
-      - '.github/workflows/etc_hosts.yml'
-      - 'molecule/common/**'
-
+    tags_ignore:
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,17 +20,9 @@ jobs:
         collection_role:
           - etc_hosts
 
-        molecule_distro:
-          - { "image_family": "centos-7", "image_project": "centos-cloud" }
-          - { "image_family": "centos-8", "image_project": "centos-cloud" }
-          - { "image_family": "ubuntu-1804-lts", "image_project": "ubuntu-os-cloud" }
-          - { "image_family": "ubuntu-2004-lts", "image_project": "ubuntu-os-cloud" }
-
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
-      MOLECULE_DISTRO: ${{ matrix.molecule_distro.image_family }}
-      MOLECULE_DISTRO_PROJECT: ${{ matrix.molecule_distro.image_project }}
 
     steps:
       - name: Git checkout
@@ -45,7 +33,7 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.12.29
+          terraform_version: 0.13
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
@@ -55,7 +43,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install molecule yamllint ansible-lint google-auth
+          pip install molecule ansible-lint yamllint google-auth
 
       - name: Setup gcloud environment
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
@@ -67,12 +55,5 @@ jobs:
       - name: Run tests
         working-directory: ansible_collections/klusters/system
         run: |
-          ssh-keygen -m PEM -t rsa -b 4096 -f ${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER} -P ''
-          export TF_VAR_ssh_public_key=${HOME}/.ssh/${GITHUB_WORKFLOW}_${GITHUB_RUN_NUMBER}.pub
-
           terraform --version
           molecule test -s ${{ matrix.collection_role }}
-
-        env:
-          TF_VAR_project_id: ${{ secrets.GCLOUD_PROJECT }}
-          GCP_SERVICE_ACCOUNT_FILE: $GOOGLE_APPLICATION_CREDENTIALS

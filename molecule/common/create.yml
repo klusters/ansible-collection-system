@@ -1,30 +1,17 @@
 ---
-- name: Create
+
+- name: Init infra
   hosts: localhost
   connection: local
   gather_facts: no
 
-  vars:
-    terraform_dir: "{{ playbook_dir }}/../terraform"
-
-  pre_tasks:
-  - name: Get Terraform scripts
-    git:
-      repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
-      dest: '{{ terraform_dir }}'
-      version: main
-
-  tasks:
-  - name: Generate Terraform vars
-    copy:
-      dest: '{{ terraform_dir }}/terraform.tfvars.json'
-      content: "{{ molecule_yml.platforms[0] }}"
-      mode: '0644'
-
-  - name: Terraform apply
-    terraform:
-      binary_path: "{{ lookup('env','TERRAFORM_CLI_PATH') + '/terraform-bin' |default(omit) }}"
-      force_init: yes
-      project_path: '{{ terraform_dir }}'
-      workspace: "{{ lookup('env','MOLECULE_DISTRO') + '-' + lookup('env','GITHUB_RUN_NUMBER') |default('default') }}"
+  roles:
+  - role: cloud-infra
+    vars:
       state: present
+      template_inventory: 'molecule_gce_instances.gcp.yml.j2'
+      template_tfvars: 'molecule_tfvars.json.j2'
+      template_ssh_config: 'molecule_ssh_config.j2'
+      terraform_project_repo: 'https://github.com/klusters/terraform-tools-gce-molecule'
+      terraform_project_version: 'ref/gcp'
+      inventory_dest: '{{ playbook_dir }}'
