@@ -1,5 +1,6 @@
 wheel
 ansible-lint
+molecule==3.5.2
 molecule-docker
 ansible
 yamllint
