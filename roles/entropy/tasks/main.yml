@@ -2,13 +2,13 @@
 
 - name: Install rng-tools
   become: yes
-  package:
+  ansible.builtin.package:
     name: rng-tools
     state: present
 
 - name: Configure rngd to use random number source device
   become: yes
-  template:
+  ansible.builtin.template:
     src: rngd.service.j2
     dest: /etc/systemd/system/rngd.service
     owner: root

@@ -2,24 +2,27 @@
 
 - name: Gather facts
   when: ansible_devices is not defined
-  setup:
+  ansible.builtin.setup:
     gather_subset: '!all,!min,hardware'
 
 - name: Install LVM2 packages
-  package:
+  become: yes
+  ansible.builtin.package:
     name: lvm2
     state: present
   when: "'lvm' in dev_mapping | json_query('[*].fs_type')"
 
 - name: Install xfsprogs packages
-  package:
+  become: yes
+  ansible.builtin.package:
     name: xfsprogs
     state: present
   when: 
   - ("'xfs' in dev_mapping | json_query('[*].fs_type')") or (default_fs_type == 'xfs')
 
 - name: Format existing block devices
-  filesystem:
+  become: yes
+  community.general.filesystem:
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     dev: "{{ item.dev_name }}"
     opts: "{{ item.options | default(omit) }}"
@@ -27,7 +30,8 @@
   loop: "{{ dev_mapping }}"
 
 - name: Mount formated block devices
-  mount:
+  become: yes
+  ansible.posix.mount:
     name: "{{ item.mount_path }}"
     src: "{{ item.dev_name }}"
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
@@ -38,7 +42,7 @@
     - item.dev_name | basename in ansible_devices
   loop: "{{ dev_mapping }}"
 
-- include: lvm.yml
+- ansible.builtin.include_tasks: lvm.yml
   when: "'lvm' in dev_mapping | json_query('[*].fs_type')"
 
 ...

@@ -1,27 +1,31 @@
 ---
 
 - name: Create volume groups
-  lvg:
+  become: yes
+  community.general.lvg:
     vg: "{{ item.name }}"
     pvs: "{{ item.pvs }}"
   loop: "{{ volume_groups }}"
 
 - name: Create logical volumes
-  lvol:
+  become: yes
+  community.general.lvol:
     vg: "{{ item.vg }}"
     lv: "{{ item.name }}"
     size: "{{ item.size }}"
   loop: "{{ logical_volumes }}"
 
 - name: Format created logical volumes
-  filesystem:
+  become: yes
+  community.general.filesystem:
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     dev: "/dev/mapper/{{ item.vg }}-{{ item.name }}"
     opts: "{{ item.options | default(omit) }}"
   loop: "{{ logical_volumes }}"
 
 - name: Mount formated logical volumes
-  mount:
+  become: yes
+  ansible.posix.mount:
     name: "{{ item.mount_path }}"
     src: "/dev/mapper/{{ item.vg }}-{{ item.name }}"
     fstype: "{{ item.fs_type | default(default_fs_type) }}"

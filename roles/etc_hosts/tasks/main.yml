@@ -2,7 +2,7 @@
 
 - name: Force Gather Info from other hosts
   when: hostvars[item].ansible_default_ipv4 is not defined
-  setup:
+  ansible.builtin.setup:
     gather_subset: '!all,!min,default_ipv4'
   delegate_to: "{{ item }}"
   delegate_facts: yes
@@ -10,7 +10,7 @@
 
 - name: "Add mappings to {{ etc_hosts_file }}"
   become: yes
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "{{ etc_hosts_file }}"
     content: "{{ lookup('template', 'templates/etc_hosts.j2') }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
