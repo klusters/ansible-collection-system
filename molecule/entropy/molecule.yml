@@ -2,6 +2,8 @@
 
 dependency:
   name: galaxy
+  options:
+    requirements-file: molecule/common/ansible_requirements.yml
 
 lint: |
   set -e
