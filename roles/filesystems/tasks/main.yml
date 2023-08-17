@@ -17,7 +17,7 @@
   ansible.builtin.package:
     name: xfsprogs
     state: present
-  when: 
+  when:
   - ("'xfs' in dev_mapping | json_query('[*].fs_type')") or (default_fs_type == 'xfs')
 
 - name: Format existing block devices
@@ -26,7 +26,7 @@
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     dev: "{{ item.dev_name }}"
     opts: "{{ item.options | default(omit) }}"
-  when: item.dev_name | basename in ansible_devices
+  when: item.dev_name | basename in ansible_devices or fs_skip_existence_check
   loop: "{{ dev_mapping }}"
 
 - name: Mount formated block devices
@@ -39,7 +39,7 @@
     state: mounted
   when:
     - item.fs_type | default(default_fs_type) != 'lvm'
-    - item.dev_name | basename in ansible_devices
+    - item.dev_name | basename in ansible_devices or fs_skip_existence_check
   loop: "{{ dev_mapping }}"
 
 - ansible.builtin.include_tasks: lvm.yml
