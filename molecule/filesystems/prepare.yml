@@ -26,7 +26,7 @@
       loop: "{{ bd_loop }}"
 
     - name: 'create /dev/loop{{ item }}'
-      command: mknod /dev/loop{{ item }} b 7 {{ 8 + item }}
+      command: mknod /dev/loop{{ item }} b 7 {{ item }}
       args:
         creates: '/dev/loop{{ item }}'
       notify:
