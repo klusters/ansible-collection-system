@@ -4,6 +4,7 @@ dependency:
   name: galaxy
   options:
     requirements-file: molecule/common/ansible_requirements.yml
+
 lint: |
   set -e
   yamllint roles/filesystems
@@ -16,8 +17,6 @@ platforms:
 - name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
   image: "dokken/${MOLECULE_DISTRO:-centos7}:latest"
   command: ${MOLECULE_DOCKER_COMMAND:-""}
-  volumes:
-  - /sys/fs/cgroup:/sys/fs/cgroup:ro
   privileged: yes
   pre_build_image: yes
 
@@ -27,7 +26,6 @@ provisioner:
     defaults:
       stdout_callback: yaml
       bin_ansible_callbacks: yes
-      remote_tmp: /tmp/.ansible
 
 verifier:
   name: ansible
