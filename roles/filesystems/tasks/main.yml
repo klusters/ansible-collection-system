@@ -6,14 +6,14 @@
     gather_subset: '!all,!min,hardware'
 
 - name: Install LVM2 packages
-  become: yes
+  become: true
   ansible.builtin.package:
     name: lvm2
     state: present
   when: "'lvm' in dev_mapping | json_query('[*].fs_type')"
 
 - name: Install xfsprogs packages
-  become: yes
+  become: true
   ansible.builtin.package:
     name: xfsprogs
     state: present
@@ -21,7 +21,7 @@
   - ("'xfs' in dev_mapping | json_query('[*].fs_type')") or (default_fs_type == 'xfs')
 
 - name: Format existing block devices
-  become: yes
+  become: true
   community.general.filesystem:
     fstype: "{{ item.fs_type | default(default_fs_type) }}"
     dev: "{{ item.dev_name }}"
@@ -30,7 +30,7 @@
   loop: "{{ dev_mapping }}"
 
 - name: Mount formated block devices
-  become: yes
+  become: true
   ansible.posix.mount:
     name: "{{ item.mount_path }}"
     src: "{{ item.dev_name }}"
