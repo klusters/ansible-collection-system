@@ -57,7 +57,7 @@ jobs:
       working-directory: ansible_collections/klusters/system
       run: |
         (test -f molecule/${{ matrix.collection_role }}/ansible_requirements.yml && ansible-galaxy install -r molecule/${{ matrix.collection_role }}/ansible_requirements.yml ) ||
-        (test -f molecule/common/ansible_requirements.yml && ansible-galaxy install -r molecule/common/ansible_requirements.yml )
+        (test -f molecule/common/ansible_requirements.yml && ansible-galaxy install -f -r molecule/common/ansible_requirements.yml )
 
     - name: Run tests
       working-directory: ansible_collections/klusters/system
