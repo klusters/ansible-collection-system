@@ -19,8 +19,14 @@
         state: absent
       loop: "{{ bd_loop }}"
 
+    - name: list existing blk devices
+      command: lsblk
+      register: lsblk
+
+    - debug: var=lsblk
+
     - name: create disk.img
-      command: lsblk && dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100
+      command: dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100
       args:
         creates: "/disk{{ item }}.img"
       loop: "{{ bd_loop }}"
