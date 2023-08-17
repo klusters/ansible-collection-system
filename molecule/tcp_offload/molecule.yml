@@ -28,6 +28,7 @@ provisioner:
     defaults:
       stdout_callback: yaml
       bin_ansible_callbacks: yes
+      remote_tmp: /tmp/.ansible
 
 verifier:
   name: ansible
