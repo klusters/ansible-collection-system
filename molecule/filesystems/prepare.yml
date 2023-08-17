@@ -4,7 +4,7 @@
   hosts: all
 
   vars:
-    bd_loop: "{{ range(0, 5, 1)|list }}"
+    bd_loop: "{{ range(240, 245, 1)|list }}"
 
   pre_tasks:
   - name: Update apt cache.
@@ -20,7 +20,7 @@
       loop: "{{ bd_loop }}"
 
     - name: create disk.img
-      command: dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100
+      command: lsblk && dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100
       args:
         creates: "/disk{{ item }}.img"
       loop: "{{ bd_loop }}"
