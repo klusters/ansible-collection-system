@@ -42,7 +42,8 @@
     - item.dev_name | basename in ansible_devices or fs_skip_existence_check
   loop: "{{ dev_mapping }}"
 
-- ansible.builtin.include_tasks: lvm.yml
+- name: LVM configuration
+  ansible.builtin.include_tasks: lvm.yml
   when: "'lvm' in dev_mapping | json_query('[*].fs_type')"
 
 ...
