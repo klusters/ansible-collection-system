@@ -9,8 +9,6 @@ on:
     - 'molecule/etc_hosts/**'
     - '.github/workflows/etc_hosts.yml'
     - 'molecule/common/**'
-    tags_ignore:
-      - '*'
 
 jobs:
   molecule:
@@ -20,31 +18,33 @@ jobs:
       PY_COLORS: 1
       MOLECULE_DISTRO: ${{ matrix.molecule_distro.distro }}
       MOLECULE_COMMAND: ${{ matrix.molecule_distro.command }}
-      
+
     strategy:
       fail-fast: true
       matrix:
         molecule_distro:
-        - {'distro': 'centos7', 'command': ''}
-        - {'distro': 'centos8', 'command': ''}
-        - {'distro': 'ubuntu1804', 'command': ''}
-        - {'distro': 'ubuntu2004', 'command': ''}
+        - {'distro': 'centos-7', 'command': '/usr/lib/systemd/systemd'}
+        - {'distro': 'rockylinux-8', 'command': '/usr/lib/systemd/systemd'}
+        - {'distro': 'rockylinux-9', 'command': '/usr/lib/systemd/systemd'}
+        - {'distro': 'ubuntu-18.04', 'command': '/bin/systemd'}
+        - {'distro': 'ubuntu-20.04', 'command': '/bin/systemd'}
+        - {'distro': 'ubuntu-22.04', 'command': '/bin/systemd'}
         collection_role:
         - etc_hosts
 
     steps:
     - name: Git checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: ansible_collections/klusters/system
 
     - name: Set up Python 3
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.x
 
     - name: Cache python packages
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ env.pythonLocation }}
         key: ${{ env.pythonLocation }}-${{ hashFiles('**/python_requirements.txt') }}
@@ -54,6 +54,12 @@ jobs:
       run: |
         (test -f molecule/${{ matrix.collection_role }}/python_requirements.txt && pip install --upgrade --upgrade-strategy eager -r molecule/${{ matrix.collection_role }}/python_requirements.txt ) ||
         (test -f molecule/common/python_requirements.txt && pip install --upgrade --upgrade-strategy eager -r molecule/common/python_requirements.txt )
+
+    - name: Install Ansible collections / roles
+      working-directory: ansible_collections/klusters/system
+      run: |
+        (test -f molecule/${{ matrix.collection_role }}/ansible_requirements.yml && ansible-galaxy install -r molecule/${{ matrix.collection_role }}/ansible_requirements.yml ) ||
+        (test -f molecule/common/ansible_requirements.yml && ansible-galaxy install -f -r molecule/common/ansible_requirements.yml )
 
     - name: Run tests
       working-directory: ansible_collections/klusters/system

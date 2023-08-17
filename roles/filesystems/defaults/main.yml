@@ -1,7 +1,7 @@
 ---
 
 default_fs_type: xfs
-
+fs_skip_existence_check: false
 dev_mapping:
     # /dev/sda:
     # mount_path: /

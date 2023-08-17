@@ -1,14 +1,16 @@
 ---
 
-- name: prepare
+- name: Prepare
   hosts: all
 
   vars:
-    bd_loop: "{{ range(0, 5, 1)|list }}"
+    bd_loop: "{{ range(3, 8, 1)|list }}"
 
   pre_tasks:
   - name: Update apt cache.
-    apt: update_cache=true cache_valid_time=600
+    apt:
+      update_cache: true
+      cache_valid_time: 600
     when: ansible_os_family == 'Debian'
 
   tasks:
@@ -19,6 +21,12 @@
         state: absent
       loop: "{{ bd_loop }}"
 
+    - name: list existing blk devices
+      command: lsblk
+      register: lsblk
+
+    - debug: var=lsblk.stdout
+
     - name: create disk.img
       command: dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100
       args:
@@ -26,7 +34,7 @@
       loop: "{{ bd_loop }}"
 
     - name: 'create /dev/loop{{ item }}'
-      command: mknod /dev/loop{{ item }} b 7 {{ 8 + item }}
+      command: mknod /dev/loop{{ item }} b 7 {{ item }}
       args:
         creates: '/dev/loop{{ item }}'
       notify:

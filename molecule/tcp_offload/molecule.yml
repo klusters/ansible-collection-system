@@ -2,6 +2,8 @@
 
 dependency:
   name: galaxy
+  options:
+    requirements-file: molecule/common/ansible_requirements.yml
 
 lint: |
   set -e
@@ -13,10 +15,8 @@ driver:
 
 platforms:
 - name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
-  image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+  image: "dokken/${MOLECULE_DISTRO:-centos7}:latest"
   command: ${MOLECULE_DOCKER_COMMAND:-""}
-  volumes:
-  - /sys/fs/cgroup:/sys/fs/cgroup:ro
   privileged: yes
   pre_build_image: yes
 
