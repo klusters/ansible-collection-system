@@ -23,7 +23,7 @@
       command: lsblk
       register: lsblk
 
-    - debug: var=lsblk
+    - debug: var=lsblk.stdout
 
     - name: create disk.img
       command: dd if=/dev/zero of=/disk{{ item }}.img bs=1M count=100

@@ -9,8 +9,6 @@ on:
     - 'molecule/tcp_offload/**'
     - '.github/workflows/tcp_offload.yml'
     - 'molecule/common/**'
-    tags-ignore:
-      - '*'
 
 jobs:
   molecule:
