@@ -9,8 +9,6 @@ on:
     - 'molecule/filesystems/**'
     - '.github/workflows/filesystems.yml'
     - 'molecule/common/**'
-    tags-ignore:
-      - '*'
 
 jobs:
   molecule:
