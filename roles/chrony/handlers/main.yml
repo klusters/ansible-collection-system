@@ -1,0 +1,7 @@
+---
+
+- name: Restart Chrony
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+  when: chrony_service_state != 'stopped'

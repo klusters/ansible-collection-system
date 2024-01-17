@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: klusters.system.chrony
+      vars:
+        chrony_service_state: stopped # Docker cannot update system time

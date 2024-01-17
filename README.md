@@ -11,6 +11,7 @@ Ansible collection that holds roles, that can be used to configure common Linux 
 |  filesystems   | ![klusters.system.filesystems](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.filesystems/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/filesystems)    |
 |  entropy   | ![klusters.system.entropy](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.entropy/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/entropy)    |
 |  tcp_offload   | ![klusters.system.tcp_offload](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.tcp_offload/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/tcp_offload)    |
+|  chrony   | ![klusters.system.chrony](https://github.com/klusters/ansible-collection-system/workflows/klusters.system.chrony/badge.svg)      | [Documentation](https://github.com/klusters/ansible-collection-system/tree/master/roles/chrony)    |
 
 ## Usage
 

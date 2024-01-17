@@ -1,0 +1,33 @@
+---
+
+dependency:
+  name: galaxy
+  options:
+    requirements-file: molecule/common/ansible_requirements.yml
+
+lint: |
+  set -e
+  yamllint roles/filesystems
+  ansible-lint roles/filesystems
+
+driver:
+  name: docker
+
+platforms:
+- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+  image: "dokken/${MOLECULE_DISTRO:-centos7}:latest"
+  command: ${MOLECULE_DOCKER_COMMAND:-""}
+  privileged: yes
+  pre_build_image: yes
+
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      bin_ansible_callbacks: yes
+
+verifier:
+  name: ansible
+
+...
