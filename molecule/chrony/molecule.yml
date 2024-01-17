@@ -11,7 +11,7 @@ lint: |
   ansible-lint roles/filesystems
 
 driver:
-  name: podman
+  name: docker
 
 platforms:
 - name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
