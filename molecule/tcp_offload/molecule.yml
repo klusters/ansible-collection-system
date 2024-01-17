@@ -14,11 +14,11 @@ driver:
   name: docker
 
 platforms:
-- name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
-  image: "dokken/${MOLECULE_DISTRO:-centos7}:latest"
-  command: ${MOLECULE_DOCKER_COMMAND:-""}
-  privileged: yes
-  pre_build_image: yes
+  - name: ${MOLECULE_SCENARIO_NAME}-${MOLECULE_DISTRO}
+    image: dokken/${MOLECULE_DISTRO:-centos7}:latest
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    privileged: yes
+    pre_build_image: yes
 
 provisioner:
   name: ansible
@@ -29,5 +29,3 @@ provisioner:
 
 verifier:
   name: ansible
-
-...
