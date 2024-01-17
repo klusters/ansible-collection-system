@@ -1,0 +1,18 @@
+---
+
+chrony_service_state: started
+
+chrony_config_servers:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+  - 2.pool.ntp.org
+  - 3.pool.ntp.org
+
+chrony_config_logdir: /var/log/chrony
+
+chrony_service_name: chronyd
+chrony_config_location: /etc/chrony.conf
+chrony_config_driftfile: /var/lib/chrony/drift
+chrony_config_keyfile: /etc/chrony.keys
+
+chrony_config_extra_options: {}
